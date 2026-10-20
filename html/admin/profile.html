@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC Admin Portal | Admin Profile</title>
+
+    <link rel="stylesheet" href="../../css/global/global.css">
+    <link rel="stylesheet" href="../../css/admin/profile.css">
+
+</head>
+<body class="admin-profile-page">
+    <div id="toast" class="toast"></div>
+    <section id="adminDashboardPage" class="page dashboard-page admin-dashboard-page">
+        <header class="dash-header">
+            <div class="brand">
+                <a href="dashboard.html" class="brand">
+                    <img src="../../assets/cec-logo.png" alt="CEC Logo">
+                    <span>CEC <b>ADMIN PORTAL</b></span>
+                </a>
+            </div>
+            <nav class="dash-nav">
+                <a href="dashboard.html" class="">HOME</a>
+                <a href="students.html" class="">STUDENTS</a>
+                <a href="teachers.html" class="">TEACHERS</a>
+                <a href="announcements.html" class="">ANNOUNCEMENTS</a>
+            </nav>
+            <div class="header-actions">
+                <a href="../ai-assistant.html" class="ai-nav-btn" title="CEC Academic Assistant" aria-label="Open CEC Academic Assistant"><span aria-hidden="true">✦</span></a>
+                
+                <button id="adminNotificationBtn" class="icon-btn">🔔<i id="adminNotificationBadge"></i></button>
+                <button id="adminProfileBtn" class="profile-circle">♙</button>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <aside class="sidebar">
+                <div class="sidebar-profile">
+                    <div class="sidebar-avatar">A</div>
+                    <div>
+                        <strong id="adminName">Administrator</strong>
+                        <span>System Administrator</span>
+                    </div>
+                </div>
+
+                <div class="side-tools">
+                    <a href="announcements.html"><span>🔔</span><small>Notifications</small></a>
+                    <a href="settings.html"><span>⚙</span><small>Settings</small></a>
+                </div>
+
+                <h4>ADMINISTRATION</h4>
+                <a class="side-link admin-side-link" href="dashboard.html" data-admin-view="home"><span>▣</span><label>Dashboard</label></a>
+                <a class="side-link admin-side-link" href="students.html" data-admin-view="students"><span>♙</span><label>Students</label></a>
+                <a class="side-link admin-side-link" href="teachers.html" data-admin-view="teachers"><span>♙</span><label>Teachers</label></a>
+                <a class="side-link admin-side-link" href="subjects.html" data-admin-view="subjects"><span>☑</span><label>Subjects</label></a>
+                <a class="side-link admin-side-link" href="classes.html" data-admin-view="classes"><span>▤</span><label>Classes & Sections</label></a>
+                <a class="side-link admin-side-link" href="enrollment.html" data-admin-view="enrollment"><span>+</span><label>Enrollment</label></a>
+                <a class="side-link admin-side-link" href="grades.html" data-admin-view="grades"><span>▥</span><label>Grades</label></a>
+                <a class="side-link admin-side-link" href="attendance.html" data-admin-view="attendance"><span>◉</span><label>Attendance</label></a>
+
+                <h4>SYSTEM</h4>
+                <a class="side-link admin-side-link" href="materials.html" data-admin-view="syllabi"><span>▤</span><label>Syllabi & Materials</label></a>
+                <a class="side-link admin-side-link" href="calendar.html" data-admin-view="events"><span>◫</span><label>Calendar & Events</label></a>
+                <a class="side-link admin-side-link" href="payments.html" data-admin-view="payments"><span>₱</span><label>Payments</label></a>
+                <a class="side-link admin-side-link" href="announcements.html" data-admin-view="announcements"><span>🔔</span><label>Announcements</label></a>
+                <a class="side-link admin-side-link" href="reports.html" data-admin-view="reports"><span>▥</span><label>Reports</label></a>
+                <a class="side-link admin-side-link" href="settings.html" data-admin-view="settings"><span>⚙</span><label>Settings</label></a>
+                <a class="logout-link" href="../index.html" id="adminLogoutBtn">↪ <span>Logout</span></a>
+            <a class="side-link" href="../ai-assistant.html"><span>✦</span><label>CEC AI Assistant</label></a></aside>
+
+            <main class="dashboard-main">
+                <div id="adminDashboardHome" class="dashboard-view"></div>
+                <div id="adminContentView" class="dashboard-view hidden"></div>
+            </main>
+        </div>
+    </section>
+
+    <div id="modalRoot"></div>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+<script src="../../js/core/firebase-config.js"></script>
+<script src="../../js/core/database.js"></script>
+
+<script src="../../js/core/app-core.js"></script>
+<script src="../../js/admin/profile.js"></script>
+
+</body>
+</html>

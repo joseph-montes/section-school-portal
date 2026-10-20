@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CEC Portal | Firebase Migration</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:40px;color:#1f2d3d}.card{max-width:760px;margin:auto;background:#fff;padding:30px;border-radius:18px;box-shadow:0 12px 35px #0001}.status{padding:14px;border-radius:10px;background:#eef3f8;margin:18px 0;white-space:pre-wrap}button{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;background:#315a86;color:#fff}button:disabled{opacity:.5;cursor:not-allowed}.small{font-size:13px;color:#65758b}code{background:#eef3f8;padding:2px 5px;border-radius:4px}
+</style>
+</head><body><div class="card"><h1>CEC Portal Firebase Migration</h1><p>Use this page once, after configuring Firebase and authorizing an administrator. It imports the old <code>cecPortalDB_v3</code> localStorage data into Cloud Firestore.</p><div id="status" class="status">Checking Firebase configuration and administrator session...</div><button id="migrate" disabled>IMPORT OLD PORTAL DATA</button><p class="small">Student passwords are never imported. Existing students are marked Not Registered so each student must complete Firebase Authentication registration.</p></div>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script><script src="js/core/firebase-config.js"></script>
+<script>
+const status=document.getElementById('status'),btn=document.getElementById('migrate');
+function say(x){status.textContent=x;}
+async function hash(v){const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(v)));return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function start(){
+ try{
+  if(!window.CEC_FIREBASE_CONFIG?.apiKey || window.CEC_FIREBASE_CONFIG.apiKey.includes('PASTE_')){say('Firebase is not configured. Edit js/core/firebase-config.js first.');return;}
+  firebase.initializeApp(window.CEC_FIREBASE_CONFIG);
+  firebase.auth().onAuthStateChanged(async user=>{
+   if(!user){say('Not signed in. Log in as a CEC administrator first, then open this page again.');return;}
+   const a=await firebase.firestore().collection('admins').doc(user.uid).get();
+   if(!a.exists || a.data().role!=='admin'){say('This account is not authorized as a CEC administrator.');return;}
+   say('Administrator verified. Ready to import.');btn.disabled=false;
+  });
+ }catch(e){console.error(e);say('Firebase initialization failed: '+e.message);}
+}
+btn.onclick=async()=>{
+ btn.disabled=true;
+ try{
+  const raw=localStorage.getItem('cecPortalDB_v3');
+  if(!raw) throw new Error('No old cecPortalDB_v3 data was found in this browser. You can still add records from the Admin Portal.');
+  const old=JSON.parse(raw), fs=firebase.firestore(), batch=fs.batch(); let count=0;
+  const collections=['teachers','subjects','classes','grades','attendance','enlistments','materials','events','payments','announcements','adminNotifications'];
+  for(const name of collections){for(const item of (old[name]||[])){const id=String(item.id||item.code);batch.set(fs.collection(name).doc(id),item,{merge:true});count++;}}
+  for(const item of (old.students||[])){
+    const id=String(item.id), ref=fs.collection('students').doc(id); const student={...item}; delete student.password; student.email=''; student.authUid=null; student.status='Not Registered';
+    if(!student.registrationCode) student.registrationCode='CEC-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    batch.set(ref,student,{merge:true});
+    batch.set(fs.collection('studentLookup').doc(id),{registered:false,registrationCodeHash:await hash(student.registrationCode),emailHash:item.email?await hash(String(item.email).trim().toLowerCase()):null,authUid:null},{merge:true}); count++;
+  }
+  await batch.commit();
+  say('Import completed successfully. Records imported: '+count+'\nStudent passwords were not imported. Students must register through Firebase Authentication.');
+ }catch(e){console.error(e);say('Import failed: '+e.message);btn.disabled=false;}
+};
+start();
+</script></body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CEC AI Assistant</title>
+<link rel="stylesheet" href="../css/global/global.css"><link rel="stylesheet" href="../css/ai-assistant.css">
+</head>
+<body class="ai-page">
+<section class="page dashboard-page">
+<header class="dash-header ai-top-header">
+  <div class="brand">
+    <a href="#" id="aiPortalLink" class="brand" aria-label="CEC Portal">
+      <img src="../assets/cec-logo.png" alt="CEC Logo">
+      <span>CEC <b>PORTAL</b></span>
+    </a>
+  </div>
+  <nav class="dash-nav ai-top-nav" aria-label="Portal navigation">
+    <a href="#" id="aiHomeLink">DASHBOARD</a>
+    <a href="#" id="aiAnnouncementsLink">ANNOUNCEMENTS</a>
+    <a href="#" id="aiCalendarLink">CALENDAR</a>
+  </nav>
+  <div class="header-actions ai-header-actions">
+    <a href="#" id="aiHeaderAssistant" class="ai-nav-btn active" title="CEC Academic Assistant" aria-label="CEC Academic Assistant"><span aria-hidden="true">✦</span></a>
+    <a href="#" id="aiNotificationLink" class="icon-btn ai-icon-link" title="Notifications" aria-label="Notifications">🔔</a>
+    <a href="#" id="aiProfileLink" class="profile-circle ai-profile-link" title="Profile" aria-label="Profile">♙</a>
+  </div>
+</header>
+<div class="dashboard-body"><main class="dashboard-main" style="width:100%">
+<div class="ai-shell">
+<aside class="ai-card ai-side">
+  <div class="ai-brand"><div class="ai-logo">✦</div><div><h2>CEC AI</h2><p>Private browser AI</p></div></div>
+  <div id="aiStatus" class="ai-status warn"><strong>AI status</strong>Starting…</div>
+  <div class="ai-model-select"><label for="aiModel">AI model</label><select id="aiModel"><option value="standard">Standard — Qwen 1.5B (better answers)</option><option value="light">Light — Qwen 0.5B (smaller download)</option></select></div>
+  <div class="ai-progress"><span id="aiProgressFill"></span></div>
+  <div class="ai-actions"><button id="aiStart" class="ai-primary" type="button">Start Local AI</button><button id="aiClear" class="ai-secondary" type="button">New conversation</button></div>
+  <div class="ai-status"><strong>Privacy</strong>Your academic context is prepared in this browser and sent to the local model running in this browser. No paid AI API key is used.</div>
+  <div class="ai-status"><strong>Important</strong>AI answers are advisory. Always verify official grades, attendance, policies, and school decisions with the portal or appropriate school staff.</div>
+</aside>
+<section class="ai-card ai-main">
+  <div class="ai-header"><div><h1>CEC Academic Assistant</h1><p>Ask questions naturally about the information available to your account.</p></div></div>
+  <div id="aiMessages" class="ai-messages"></div>
+  <div class="ai-prompt"><div class="ai-input-row"><textarea id="aiInput" placeholder="Ask CEC AI something…" aria-label="Ask CEC AI"></textarea><button id="aiSend" class="ai-send" type="button" disabled>Send</button></div><div class="ai-disclaimer">Do not enter passwords, registration codes, or other secrets into the chat.</div></div>
+</section>
+</div>
+</main></div></section>
+<div id="modalRoot"></div>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+<script src="../js/core/firebase-config.js"></script><script src="../js/core/database.js"></script><script src="../js/core/app-core.js"></script><script src="../js/ai-assistant.js"></script>
+</body></html>

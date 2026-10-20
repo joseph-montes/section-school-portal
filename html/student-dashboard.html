@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC Portal | Student Dashboard</title>
+
+    <link rel="stylesheet" href="../css/global/global.css">
+    <link rel="stylesheet" href="../css/student/dashboard.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="student-dashboard-page">
+
+    <!-- =====================================================
+         TOAST MESSAGE
+    ====================================================== -->
+    <div id="toast" class="toast"></div>
+
+    <!-- =====================================================
+         STUDENT DASHBOARD
+    ====================================================== -->
+    <section id="dashboardPage" class="page dashboard-page">
+
+        <!-- =================================================
+             TOP NAVIGATION
+        ================================================== -->
+        <header class="dash-header">
+            <div class="brand">
+                <a href="#home" class="brand">
+                    <img src="../assets/cec-logo.png" alt="CEC Logo">
+                    <span>CEC <b>PORTAL</b></span>
+                </a>
+            </div>
+
+            <nav class="dash-nav" aria-label="Student portal navigation">
+                <a href="#home" class="active dashboard-top-link" data-top-section="home">HOME</a>
+                <a href="#about" class="dashboard-top-link" data-top-section="about">ABOUT</a>
+                <a href="#program" class="dashboard-top-link" data-top-section="program">PROGRAM</a>
+                <a href="#contact" class="dashboard-top-link" data-top-section="contact">CONTACT</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="ai-assistant.html" class="ai-nav-btn" title="CEC Academic Assistant" aria-label="Open CEC Academic Assistant"><span aria-hidden="true">✦</span></a>
+                
+                <button id="notificationBtn" class="icon-btn" title="Notifications" type="button">
+                    🔔
+                    <i id="notificationBadge"></i>
+                </button>
+                <button id="profileBtn" class="profile-circle" type="button" title="Profile">♙</button>
+            </div>
+        </header>
+
+        <!-- =================================================
+             DASHBOARD BODY
+        ================================================== -->
+        <div class="dashboard-body">
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+            <aside class="sidebar">
+                <div class="sidebar-profile">
+                    <div id="sidebarAvatar" class="sidebar-avatar">♙</div>
+                    <div>
+                        <strong id="sidebarStudentName">Student</strong>
+                        <span id="sidebarStudentId">Student</span>
+                    </div>
+                </div>
+
+                <div class="side-tools">
+                    <a href="notifications.html">
+                        <span>🔔</span>
+                        <small>Notifications</small>
+                    </a>
+                    <a href="settings.html">
+                        <span>⚙</span>
+                        <small>Settings</small>
+                    </a>
+                </div>
+
+                <h4>ACADEMIC</h4>
+                <a class="side-link active" href="student-dashboard.html" data-view="home">
+                    <span>▣</span>
+                    <label>Class Schedule</label>
+                </a>
+                <a class="side-link" href="grades.html" data-view="grades">
+                    <span>▥</span>
+                    <label>Grades &amp; GPA</label>
+                </a>
+                <a class="side-link" href="attendance.html" data-view="attendance">
+                    <span>◉</span>
+                    <label>Attendance Records</label>
+                </a>
+                <a class="side-link" href="subjects.html" data-view="subjects">
+                    <span>☑</span>
+                    <label>Subject Enlistment</label>
+                </a>
+                <a class="side-link" href="materials.html" data-view="syllabi">
+                    <span>▤</span>
+                    <label>Syllabi &amp; Materials</label>
+                </a>
+                <a class="side-link" href="calendar.html" data-view="calendar">
+                    <span>◫</span>
+                    <label>Calendar &amp; Events</label>
+                </a>
+                <a class="side-link" href="announcements.html" data-view="announcements">
+                    <span>🔔</span>
+                    <label>Announcements</label>
+                </a>
+                <a class="side-link" href="ai-assistant.html" data-view="ai">
+                    <span>✦</span>
+                    <label>CEC AI Assistant</label>
+                </a>
+
+                <h4>FINANCE &amp; PROFILE</h4>
+                <a class="side-link" href="tuition.html" data-view="tuition">
+                    <span>₱</span>
+                    <label>Tuition &amp; Payments</label>
+                </a>
+                <a class="side-link" href="profile.html" data-view="profile">
+                    <span>♙</span>
+                    <label>Profile &amp; Contact</label>
+                </a>
+                <a class="side-link" href="settings.html" data-view="settings">
+                    <span>⚙</span>
+                    <label>Settings</label>
+                </a>
+                <a class="logout-link" href="index.html" id="logoutBtn">
+                    ↪ <span>Logout</span>
+                </a>
+            </aside>
+
+            <!-- =================================================
+                 MAIN CONTENT
+            ================================================== -->
+            <main class="dashboard-main">
+
+                <!-- HOME -->
+                <section id="home" class="dashboard-top-section top-section-home">
+                    <div id="dashboardHome" class="dashboard-view"></div>
+                </section>
+
+                <!-- ABOUT -->
+                <section id="about" class="dashboard-info-section about-section">
+                    <div class="info-section-heading">
+                        <div>
+                            <p class="eyebrow">ABOUT CEBU EASTERN COLLEGE</p>
+                            <h2>About CEC</h2>
+                        </div>
+                        <span class="info-section-number">01</span>
+                    </div>
+
+                    <div class="about-content-grid">
+                        <div class="about-main-card">
+                            <h3>Cebu Eastern College</h3>
+                            <p>
+                                Cebu Eastern College (
+                                <a href="https://en.wikipedia.org/wiki/Simplified_Chinese_characters" target="_blank" rel="noopener noreferrer">simplified Chinese</a>:
+                                宿务东方学院;
+                                <a href="https://en.wikipedia.org/wiki/Traditional_Chinese_characters" target="_blank" rel="noopener noreferrer">traditional Chinese</a>:
+                                宿務東方學院;
+                                <a href="https://en.wikipedia.org/wiki/Pinyin" target="_blank" rel="noopener noreferrer">pinyin</a>:
+                                Sùwù Dōngfāng Xuéyuàn;
+                                <a href="https://en.wikipedia.org/wiki/Pe%CC%8Dh-%C4%81e-j%C4%AB" target="_blank" rel="noopener noreferrer">Pe̍h-ōe-jī</a>:
+                                Sok-bū Tong-hong Ha̍k-īⁿ) is a Chinese Filipino school situated at the intersection of Dimasalang and Leon Kilat in
+                                <a href="https://en.wikipedia.org/wiki/Cebu_City" target="_blank" rel="noopener noreferrer">Cebu City</a>, Philippines.
+                            </p>
+                            <p>
+                                The campus offers kindergarten, elementary, high school and college classes. Additionally, the school operates a separate campus on D. Jakosalem that focuses on elementary-level education.
+                            </p>
+                            <p>
+                                CEC offers Chinese classes as well as English and Filipino subjects, supporting students through different levels of education and helping preserve its Chinese-Filipino educational heritage.
+                            </p>
+                        </div>
+
+                        <div class="about-facts-card">
+                            <div class="about-fact">
+                                <span>LOCATION</span>
+                                <strong>Dimasalang &amp; Leon Kilat</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                            <div class="about-fact">
+                                <span>EDUCATION LEVELS</span>
+                                <strong>Kinder to College</strong>
+                                <small>With a separate elementary campus on D. Jakosalem</small>
+                            </div>
+                            <div class="about-fact">
+                                <span>LANGUAGES</span>
+                                <strong>Chinese · English · Filipino</strong>
+                                <small>Language subjects are part of the school's academic offering.</small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROGRAM -->
+                <section id="program" class="dashboard-info-section program-section">
+                    <div class="info-section-heading">
+                        <div>
+                            <p class="eyebrow">ACADEMIC PROGRAMS</p>
+                            <h2>College Programs</h2>
+                        </div>
+                        <span class="info-section-number">02</span>
+                    </div>
+
+                    <p class="section-intro">
+                        The following programs are presented in the student portal as the current college-course list provided for this project.
+                    </p>
+
+                    <div class="program-card-grid">
+                        <article class="portal-program-card">
+                            <span>01</span>
+                            <h3>BSHM</h3>
+                            <p>Bachelor of Science in Hospitality Management</p>
+                        </article>
+
+                        <article class="portal-program-card">
+                            <span>02</span>
+                            <h3>BSTM</h3>
+                            <p>Bachelor of Science in Tourism Management</p>
+                        </article>
+
+                        <article class="portal-program-card">
+                            <span>03</span>
+                            <h3>BSIT</h3>
+                            <p>Bachelor of Science in Information Technology</p>
+                        </article>
+
+                        <article class="portal-program-card">
+                            <span>04</span>
+                            <h3>BSCRIM</h3>
+                            <p>Bachelor of Science in Criminology</p>
+                        </article>
+
+                        <article class="portal-program-card">
+                            <span>05</span>
+                            <h3>BEED</h3>
+                            <p>Bachelor of Elementary Education</p>
+                        </article>
+
+                        <article class="portal-program-card">
+                            <span>06</span>
+                            <h3>BSED</h3>
+                            <p>Bachelor of Secondary Education major in Mathematics and English</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- CONTACT -->
+                <section id="contact" class="dashboard-info-section contact-section">
+                    <div class="info-section-heading">
+                        <div>
+                            <p class="eyebrow">CONTACT DIRECTORY</p>
+                            <h2>Stay Connected</h2>
+                        </div>
+                        <span class="info-section-number">03</span>
+                    </div>
+
+                    <p class="section-intro">
+                        Use the directory below to reach the school and its student and academic communities. Contact details shown here are based on publicly listed information and should be confirmed with the school for department-specific concerns.
+                    </p>
+
+                    <div class="contact-card-grid">
+                        <article class="portal-contact-card">
+                            <div class="contact-icon">A</div>
+                            <div>
+                                <span>STUDENT PUBLICATION</span>
+                                <h3>ATALAYA</h3>
+                                <p>The official student publication of Cebu Eastern College.</p>
+                                <div class="contact-details">
+                                    <strong>Leon Kilat Street, Cebu City 6000</strong>
+                                    <strong>+63 991 209 6728</strong>
+                                </div>
+                                <a href="https://www.medioq.com/PH/Cebu-City/118030581202883/Atalaya-Publication" target="_blank" rel="noopener noreferrer" class="contact-link">View Atalaya updates →</a>
+                            </div>
+                        </article>
+
+                        <article class="portal-contact-card">
+                            <div class="contact-icon">CEC</div>
+                            <div>
+                                <span>MAIN SCHOOL</span>
+                                <h3>CEBU EASTERN COLLEGE</h3>
+                                <p>For general school, enrollment and campus inquiries.</p>
+                                <div class="contact-details">
+                                    <strong>Leon Kilat Street Corner Dimas-Alang, Cebu City 6000</strong>
+                                    <strong>(032) 256-2523</strong>
+                                    <strong>(032) 256-2510 · (032) 256-2496</strong>
+                                    <strong>(032) 256-2526</strong>
+                                </div>
+                                <a href="http://Cebueasterncollege.edu.ph/" target="_blank" rel="noopener noreferrer" class="contact-link">Visit CEC website →</a>
+                            </div>
+                        </article>
+
+                        <article class="portal-contact-card">
+                            <div class="contact-icon">IT</div>
+                            <div>
+                                <span>COLLEGE DEPARTMENT</span>
+                                <h3>BSIT DEPARTMENT</h3>
+                                <p>For Information Technology program and department-related concerns.</p>
+                                <div class="contact-details">
+                                    <strong>Cebu Eastern College · Leon Kilat Street</strong>
+                                    <strong>Cebu City, Cebu 6000</strong>
+                                    <strong>Use the CEC main lines for department assistance.</strong>
+                                </div>
+                                <a href="http://Cebueasterncollege.edu.ph/" target="_blank" rel="noopener noreferrer" class="contact-link">Contact CEC →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="contact-note">
+                        <strong>Note:</strong> Direct BSIT department contact information was not clearly listed in the public sources checked, so the CEC main contact is provided instead of inventing a department number or email.
+                    </div>
+                </section>
+
+                <!-- DYNAMIC STUDENT VIEW -->
+                <div id="contentView" class="dashboard-view hidden"></div>
+            </main>
+        </div>
+    </section>
+
+    <div id="modalRoot"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+<script src="../js/core/firebase-config.js"></script>
+<script src="../js/core/database.js"></script>
+    <script src="../js/core/app-core.js"></script>
+    <script src="../js/student/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC Portal | Login</title>
+
+    <link rel="stylesheet" href="../css/global/global.css">
+    <link rel="stylesheet" href="../css/public/login.css">
+
+</head>
+<body class="public-login-page">
+    <div id="toast" class="toast"></div>
+
+    <section id="authPage" class="page auth-page">
+        <div class="auth-left">
+            <img src="../assets/cec-building.png" alt="Cebu Eastern College Building">
+            <div class="auth-image-overlay">
+                <div>CEBU EASTERN COLLEGE</div>
+                <small>STUDENT INFORMATION PORTAL</small>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <a class="back-home" href="index.html">← Back to Portal</a>
+
+            <div class="auth-brand">
+                <img src="../assets/cec-logo.png" alt="CEC Logo">
+                <strong>CEBU EASTERN COLLEGE<br><span>STUDENT PORTAL</span></strong>
+            </div>
+
+            <div id="loginCard" class="auth-card">
+                <h2>LOG IN</h2>
+                <p>Welcome back. Please enter your credentials.</p>
+
+                <form id="loginForm">
+                    <label>
+                        Student ID
+                        <div class="input-wrap">
+                            <span>▣</span>
+                            <input id="loginId" required placeholder="Enter Student ID">
+                        </div>
+                    </label>
+
+                    <label>
+                        Password
+                        <div class="input-wrap">
+                            <span>🔒</span>
+                            <input id="loginPassword" type="password" required placeholder="Enter Password">
+                            <button type="button" class="eye" data-target="loginPassword" aria-label="Show password" title="Show password">◉</button>
+                        </div>
+                    </label>
+
+                    <button class="primary-btn">LOGIN</button>
+                    <button type="button" class="text-btn" id="forgotBtn">Forgot Password?</button>
+                </form>
+
+                <div class="auth-switch">
+                    Don't have an account?
+                    <button id="showRegister">REGISTER HERE</button>
+                </div>
+
+                <div class="auth-switch">
+                    Administrator?
+                    <button id="openAdminLogin">LOGIN AS ADMIN</button>
+                </div>
+            </div>
+
+            <div id="registerCard" class="auth-card hidden">
+                <h2>CREATE ACCOUNT</h2>
+                <p>Use the Student ID and registration code provided by the administrator, then create your password.</p>
+
+                <form id="registerForm">
+                    <label>
+                        Student ID
+                        <div class="input-wrap">
+                            <span>▣</span>
+                            <input id="regId" required placeholder="Assigned Student ID">
+                        </div>
+                    </label>
+
+                    <label>
+                        Registration Code
+                        <div class="input-wrap">
+                            <span>🔑</span>
+                            <input id="regCode" required placeholder="Code provided by the administrator">
+                        </div>
+                    </label>
+
+                    <label>
+                        Gmail Address
+                        <div class="input-wrap">
+                            <span>✉</span>
+                            <input id="regEmail" type="email" required autocomplete="email" placeholder="yourname@gmail.com">
+                        </div>
+                    </label>
+
+                    <label>
+                        Password
+                        <div class="input-wrap">
+                            <span>🔒</span>
+                            <input id="regPassword" type="password" required placeholder="Create Password">
+                            <button type="button" class="eye" data-target="regPassword" aria-label="Show password" title="Show password">◉</button>
+                        </div>
+                        <ul id="regPasswordRequirements" class="password-requirements" aria-live="polite"></ul>
+                    </label>
+
+                    <label>
+                        Confirm Password
+                        <div class="input-wrap">
+                            <span>🔒</span>
+                            <input id="regConfirm" type="password" required placeholder="Confirm Password">
+                            <button type="button" class="eye" data-target="regConfirm" aria-label="Show password" title="Show password">◉</button>
+                        </div>
+                    </label>
+
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="termsCheckbox">
+                        <label for="termsCheckbox">
+                            I agree to the
+                            <button type="button" class="terms-link" id="openTerms">Terms and Conditions</button>
+                        </label>
+                    </div>
+
+                    <button class="primary-btn">REGISTER</button>
+                </form>
+
+                <div class="auth-switch">
+                    Already have an account?
+                    <button id="showLogin">LOGIN HERE</button>
+                </div>
+            </div>
+
+            <div id="adminAuthPage" class="auth-card hidden">
+                <h2>ADMIN LOGIN</h2>
+                <p>Sign in to manage the CEC school portal.</p>
+
+                <form id="adminLoginForm">
+                    <label>
+                        Administrator Email
+                        <div class="input-wrap">
+                            <span>▣</span>
+                            <input id="adminUsername" required placeholder="admin@cec.edu.ph">
+                        </div>
+                    </label>
+
+                    <label>
+                        Password
+                        <div class="input-wrap">
+                            <span>🔒</span>
+                            <input id="adminPassword" type="password" required placeholder="Password">
+                            <button type="button" class="eye" data-target="adminPassword" aria-label="Show password" title="Show password">◉</button>
+                        </div>
+                    </label>
+
+                    <button type="submit" class="primary-btn">LOGIN AS ADMIN</button>
+                </form>
+
+                <div id="adminLockoutNotice" class="admin-lockout-notice hidden" role="status" aria-live="polite">
+                    <p><b>ADMIN LOGIN TEMPORARILY LOCKED</b></p>
+                    <button id="adminLockoutButton" type="button" class="primary-btn" disabled>LOGIN AVAILABLE IN 1H 00m 00s</button>
+                </div>
+
+                <div class="demo-note">
+                    Firebase Authentication is used for administrator sign-in. Create the admin account in Firebase Authentication and authorize its UID in the Firestore <b>admins</b> collection.
+                </div>
+
+                <div class="auth-switch">
+                    Faculty member?
+                    <button id="openFacultyLogin">LOGIN AS FACULTY</button>
+                </div>
+                <div class="auth-switch">
+                    Student?
+                    <button id="backToStudentLogin">LOGIN AS STUDENT</button>
+                </div>
+            </div>
+
+            <div id="facultyAuthPage" class="auth-card hidden">
+                <h2>FACULTY LOGIN</h2>
+                <p>Sign in to manage grades for your assigned subjects and classes.</p>
+                <form id="facultyLoginForm">
+                    <label>Faculty Email<div class="input-wrap"><span>✉</span><input id="facultyEmail" type="email" required placeholder="teacher@gmail.com"></div></label>
+                    <label>Password<div class="input-wrap"><span>🔒</span><input id="facultyPassword" type="password" required placeholder="Password"><button type="button" class="eye" data-target="facultyPassword" aria-label="Show password" title="Show password">◉</button></div></label>
+                    <button type="submit" class="primary-btn">LOGIN AS FACULTY</button>
+                    <button type="button" class="text-btn" id="facultyForgotBtn">Forgot Password / Set Password</button>
+                </form>
+                <div class="demo-note">Faculty accounts use Firebase Authentication. The administrator creates the faculty record and sends a password setup email. The faculty member creates their own password; the administrator never needs to know it.</div>
+                <div class="auth-switch">Student? <button id="backToStudentFromFaculty" type="button">LOGIN AS STUDENT</button></div>
+            </div>
+
+            <div id="facultyPasswordInviteCard" class="auth-card faculty-password-invite-card hidden" aria-hidden="true">
+                <h3 id="facultyPasswordSetupTitle">Faculty Setup Password</h3>
+                <p id="facultyPasswordSetupIntro">For a new faculty account, enter your registered faculty email. Firebase will send a secure link to <b>create your password</b>. For an existing account, the same secure link can be used to reset the password. The administrator never sees the password.</p>
+                <form id="facultyPasswordSetupRequestForm" class="faculty-password-setup-form">
+                    <label>Faculty Email
+                        <div class="input-wrap"><span>✉</span><input id="facultySetupEmail" type="email" required placeholder="faculty@cec.edu.ph" autocomplete="email"></div>
+                    </label>
+                    <button type="submit" class="primary-btn">SEND FACULTY SETUP PASSWORD LINK</button>
+                </form>
+                <form id="facultyPasswordSetupForm" class="faculty-password-setup-form hidden">
+                    <label>Create Password
+                        <div class="input-wrap"><span>🔒</span><input id="facultySetupPassword" type="password" minlength="8" required placeholder="Create a new password" autocomplete="new-password"><button type="button" class="eye" data-target="facultySetupPassword" aria-label="Show password" title="Show password">◉</button></div>
+                    </label>
+                    <label>Confirm New Password
+                        <div class="input-wrap"><span>🔒</span><input id="facultyPasswordSetupConfirm" type="password" minlength="8" required placeholder="Re-enter your password" autocomplete="new-password"><button type="button" class="eye" data-target="facultyPasswordSetupConfirm" aria-label="Show password" title="Show password">◉</button></div>
+                    </label>
+                    <button type="submit" class="primary-btn">CREATE PASSWORD</button>
+                </form>
+                <div id="facultyPasswordSetupStatus" class="password-setup-status" role="status" aria-live="polite"></div>
+                <div class="auth-switch"><button id="facultyPasswordSetupBack" type="button">BACK TO FACULTY LOGIN</button></div>
+            </div>
+
+            <div id="facultyOtpPage" class="auth-card hidden" aria-hidden="true">
+                <h2>VERIFY FACULTY LOGIN</h2>
+                <p>Enter the one-time verification code to verify your faculty email before accessing the portal.</p>
+                <div class="faculty-otp-demo-box" aria-live="assertive" aria-label="Faculty verification code">
+                    <div class="faculty-otp-demo-label">YOUR VERIFICATION CODE</div>
+                    <div id="facultyOtpDigits" class="faculty-otp-digits" aria-label="Six digit verification code">
+                        <span>-</span><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span>
+                    </div>
+                    <div class="faculty-otp-demo-code-text">Code: <strong id="facultyOtpDemoCode">------</strong></div>
+                    <small>Verification destination: <span id="facultyOtpEmail">faculty email</span>. This is the actual one-time code generated for this demo. In production, send this code through the faculty member's verified email or SMS.</small>
+                </div>
+                <form id="facultyOtpForm">
+                    <label>Verification Code<div class="input-wrap"><span>🔐</span><input id="facultyOtpInput" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="Enter 6-digit code"></div></label>
+                    <button class="primary-btn">VERIFY &amp; CONTINUE</button>
+                </form>
+                <div class="auth-switch"><button id="facultyOtpBack" type="button">BACK TO FACULTY LOGIN</button></div>
+            </div>
+
+            <div id="adminOtpPage" class="auth-card hidden" aria-hidden="true">
+                <h2>VERIFY ADMIN LOGIN</h2>
+                <p>Enter the one-time verification code to complete administrator authentication.</p>
+
+                <div class="admin-otp-demo-box" aria-live="assertive" aria-label="Administrator verification code">
+                    <div class="admin-otp-demo-label">YOUR VERIFICATION CODE</div>
+                    <div id="adminOtpDigits" class="admin-otp-digits" aria-label="Six digit verification code">
+                        <span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span>
+                    </div>
+                    <div class="admin-otp-demo-code-text">Code: <strong id="adminOtpDemoCode">------</strong></div>
+                    <small>This is the actual one-time code generated for this demo. In production, send this code through the administrator's verified email or SMS.</small>
+                </div>
+
+                <form id="adminOtpForm">
+                    <label>
+                        Verification Code
+                        <div class="input-wrap">
+                            <span>🔐</span>
+                            <input id="adminOtpInput" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="Enter 6-digit code">
+                        </div>
+                    </label>
+                    <button class="primary-btn">VERIFY &amp; CONTINUE</button>
+                </form>
+
+                <div class="auth-switch">
+                    <button id="backToAdminLogin" type="button">BACK TO ADMIN LOGIN</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modalRoot"></div>
+
+    <div id="termsModal" class="modal hidden">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2>Terms and Conditions</h2>
+                <button data-close-modal>×</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Account Registration</h3>
+                <p>Users must provide accurate information and protect their login credentials.</p>
+                <h3>2. Proper Use</h3>
+                <p>The portal is intended for legitimate academic and school-related transactions.</p>
+                <h3>3. Security</h3>
+                <p>Users must not access another person's account or interfere with portal operation.</p>
+                <h3>4. Privacy</h3>
+                <p>Information may be used for account management and academic services.</p>
+            </div>
+            <div class="modal-foot">
+                <button class="primary-btn" id="agreeTerms">I Agree</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const adminLoginButton = document.getElementById("openAdminLogin");
+        const studentLoginCard = document.getElementById("loginCard");
+        const adminLoginCard = document.getElementById("adminAuthPage");
+        const registerCard = document.getElementById("registerCard");
+        const facultyLoginCard = document.getElementById("facultyAuthPage");
+        const facultyPasswordInviteCard = document.getElementById("facultyPasswordInviteCard");
+        const studentBackButton = document.getElementById("backToStudentLogin");
+        const facultyBackButton = document.getElementById("backToStudentFromFaculty");
+        const facultyLoginButton = document.getElementById("openFacultyLogin");
+
+        function showFacultyPasswordInvite(show) {
+            facultyPasswordInviteCard?.classList.toggle("hidden", !show);
+            facultyPasswordInviteCard?.setAttribute("aria-hidden", show ? "false" : "true");
+        }
+
+        adminLoginButton?.addEventListener("click", () => {
+            studentLoginCard.classList.add("hidden"); registerCard.classList.add("hidden"); facultyLoginCard?.classList.add("hidden"); showFacultyPasswordInvite(false); adminLoginCard.classList.remove("hidden");
+        });
+        facultyLoginButton?.addEventListener("click", () => {
+            studentLoginCard.classList.add("hidden"); registerCard.classList.add("hidden"); adminLoginCard.classList.add("hidden"); facultyLoginCard?.classList.remove("hidden"); showFacultyPasswordInvite(false);
+        });
+
+        studentBackButton?.addEventListener("click", () => { adminLoginCard.classList.add("hidden"); facultyLoginCard?.classList.add("hidden"); showFacultyPasswordInvite(false); studentLoginCard.classList.remove("hidden"); });
+        facultyBackButton?.addEventListener("click", () => { facultyLoginCard?.classList.add("hidden"); showFacultyPasswordInvite(false); studentLoginCard.classList.remove("hidden"); });
+
+        // Terms and Conditions modal
+        const termsModal = document.getElementById("termsModal");
+        const openTermsButton = document.getElementById("openTerms");
+        const agreeTermsButton = document.getElementById("agreeTerms");
+        openTermsButton?.addEventListener("click", (event) => {
+            event.preventDefault();
+            termsModal?.classList.remove("hidden");
+            termsModal?.setAttribute("aria-hidden", "false");
+        });
+        termsModal?.querySelectorAll("[data-close-modal]").forEach((button) => {
+            button.addEventListener("click", () => {
+                termsModal.classList.add("hidden");
+                termsModal.setAttribute("aria-hidden", "true");
+            });
+        });
+        agreeTermsButton?.addEventListener("click", () => {
+            const termsCheckbox = document.getElementById("termsCheckbox");
+            if (termsCheckbox) termsCheckbox.checked = true;
+            termsModal?.classList.add("hidden");
+            termsModal?.setAttribute("aria-hidden", "true");
+        });
+        termsModal?.addEventListener("click", (event) => {
+            if (event.target === termsModal) {
+                termsModal.classList.add("hidden");
+                termsModal.setAttribute("aria-hidden", "true");
+            }
+        });
+
+        const requestedRole = new URLSearchParams(location.search).get("role");
+        if (requestedRole === "admin") { studentLoginCard.classList.add("hidden"); showFacultyPasswordInvite(false); adminLoginCard.classList.remove("hidden"); }
+        if (requestedRole === "faculty") { studentLoginCard.classList.add("hidden"); facultyLoginCard?.classList.remove("hidden"); showFacultyPasswordInvite(false); }
+    </script>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+<script src="../js/core/firebase-config.js"></script>
+<script src="../js/core/database.js"></script>
+<script src="../js/core/app-core.js"></script>
+<script src="../js/public/login.js"></script>
+
+</body>
+</html>

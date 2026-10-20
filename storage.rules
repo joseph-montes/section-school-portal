@@ -1,0 +1,62 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isFaculty() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/facultyRoles/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.role == 'faculty'
+        && firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.email == request.auth.token.email
+        && firestore.exists(/databases/(default)/documents/teachers/$(firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.teacherId))
+        && firestore.get(/databases/(default)/documents/teachers/$(firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.teacherId)).data.status == 'Active'
+        && firestore.get(/databases/(default)/documents/teachers/$(firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.teacherId)).data.email == request.auth.token.email;
+    }
+
+    function facultyTeacherId() {
+      return firestore.get(/databases/(default)/documents/facultyRoles/$(request.auth.uid)).data.teacherId;
+    }
+
+    function facultyOwnsClass(classId) {
+      return isFaculty()
+        && firestore.exists(/databases/(default)/documents/classes/$(classId))
+        && (
+          firestore.get(/databases/(default)/documents/classes/$(classId)).data.teacherAuthUid == request.auth.uid
+          || firestore.get(/databases/(default)/documents/classes/$(classId)).data.teacherId == facultyTeacherId()
+        );
+    }
+
+    function studentIdForUser() {
+      return firestore.get(/databases/(default)/documents/userRoles/$(request.auth.uid)).data.studentId;
+    }
+
+    function isStudent() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/userRoles/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/userRoles/$(request.auth.uid)).data.role == 'student';
+    }
+
+    function studentAssignedToClass(classId) {
+      return isStudent()
+        && firestore.exists(/databases/(default)/documents/classes/$(classId))
+        && firestore.get(/databases/(default)/documents/classes/$(classId)).data.keys().hasAny(['studentIds'])
+        && firestore.get(/databases/(default)/documents/classes/$(classId)).data.studentIds.hasAny([studentIdForUser()]);
+    }
+
+    match /courseMaterials/{classId}/{materialId}/{fileName} {
+      allow read: if facultyOwnsClass(classId) || studentAssignedToClass(classId);
+
+      allow create: if facultyOwnsClass(classId)
+        && request.resource.size <= 25 * 1024 * 1024
+        && request.resource.contentType.matches('^(application/pdf|application/msword|application/vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document|application/vnd\\.ms-powerpoint|application/vnd\\.openxmlformats-officedocument\\.presentationml\\.presentation|application/vnd\\.ms-excel|application/vnd\\.openxmlformats-officedocument\\.spreadsheetml\\.sheet|text/plain|image/(png|jpeg|webp)|application/zip|application/x-zip-compressed)$');
+
+      allow update: if facultyOwnsClass(classId)
+        && request.resource.size <= 25 * 1024 * 1024
+        && request.resource.contentType.matches('^(application/pdf|application/msword|application/vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document|application/vnd\\.ms-powerpoint|application/vnd\\.openxmlformats-officedocument\\.presentationml\\.presentation|application/vnd\\.ms-excel|application/vnd\\.openxmlformats-officedocument\\.spreadsheetml\\.sheet|text/plain|image/(png|jpeg|webp)|application/zip|application/x-zip-compressed)$');
+
+      allow delete: if facultyOwnsClass(classId);
+    }
+  }
+}

@@ -1,0 +1,561 @@
+.faculty-dashboard-page .dash-header,.faculty-grades-page .dash-header,.faculty-classes-page .dash-header,.faculty-profile-page .dash-header{position:sticky;top:0;z-index:20}.faculty-dashboard-page .content-panel,.faculty-grades-page .content-panel,.faculty-classes-page .content-panel,.faculty-profile-page .content-panel{max-width:1200px}.faculty-grades-page .data-table{min-width:980px}.faculty-grades-page .info-box{margin-bottom:18px}.faculty-dashboard-page .metric-grid{margin-bottom:20px}
+
+
+/* Faculty portal mobile navigation and responsive tables */
+.faculty-mobile-menu-overlay.show { display:block; }
+
+@media(max-width:900px){
+    .faculty-dashboard-page .dash-header,
+    .faculty-grades-page .dash-header,
+    .faculty-classes-page .dash-header,
+    .faculty-profile-page .dash-header{
+        position:sticky;
+        top:0;
+        z-index:20;
+    }
+
+    .faculty-dashboard-page .sidebar,
+    .faculty-grades-page .sidebar,
+    .faculty-classes-page .sidebar,
+    .faculty-profile-page .sidebar{
+        position:fixed;
+        left:0;
+        top:0;
+        bottom:0;
+        width:280px;
+        max-height:none;
+        display:block;
+        z-index:1200;
+        padding:18px 12px;
+        overflow-y:auto;
+        transform:translateX(-105%);
+        transition:transform .24s ease;
+        box-shadow:16px 0 35px rgba(18,39,53,.14);
+    }
+
+    .faculty-dashboard-page .sidebar.mobile-open,
+    .faculty-grades-page .sidebar.mobile-open,
+    .faculty-classes-page .sidebar.mobile-open,
+    .faculty-profile-page .sidebar.mobile-open{
+        transform:translateX(0);
+    }
+
+    .faculty-dashboard-page .sidebar-profile,
+    .faculty-grades-page .sidebar-profile,
+    .faculty-classes-page .sidebar-profile,
+    .faculty-profile-page .sidebar-profile,
+    .faculty-dashboard-page .sidebar h4,
+    .faculty-grades-page .sidebar h4,
+    .faculty-classes-page .sidebar h4,
+    .faculty-profile-page .sidebar h4{
+        display:block;
+    }
+
+    .faculty-dashboard-page .side-link,
+    .faculty-grades-page .side-link,
+    .faculty-classes-page .side-link,
+    .faculty-profile-page .side-link,
+    .faculty-dashboard-page .logout-link,
+    .faculty-grades-page .logout-link,
+    .faculty-classes-page .logout-link,
+    .faculty-profile-page .logout-link{
+        width:100%;
+        min-width:0;
+        display:flex;
+        margin:2px 0;
+        padding:11px 10px;
+        background:transparent;
+        border-radius:7px;
+        justify-content:flex-start;
+    }
+
+    .faculty-grades-page .data-table{
+        min-width:900px;
+    }
+
+    .faculty-dashboard-page .dashboard-main,
+    .faculty-grades-page .dashboard-main,
+    .faculty-classes-page .dashboard-main,
+    .faculty-profile-page .dashboard-main{
+        width:100%;
+    }
+}
+
+.teacher-login-box p{margin:6px 0 12px}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-weight:600}
+.checkbox-row input{width:auto}
+
+/* Faculty course-material manager */
+.faculty-classes-page .data-table { min-width: 1080px; }
+.material-manager { max-height: 72vh; overflow-y: auto; }
+.material-manager .full-width { grid-column: 1 / -1; }
+.material-manager-list { margin-top: 20px; }
+.material-manager-list h3 { margin: 0 0 10px; }
+.material-manager-row { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; border-top:1px solid rgba(18,39,53,.10); }
+.material-manager-row div { min-width:0; }
+.material-manager-row b, .material-manager-row small { display:block; }
+.material-manager-row small { margin-top:4px; color:#6b7780; overflow-wrap:anywhere; }
+@media(max-width:700px){ .material-manager .form-grid { grid-template-columns:1fr; } .material-manager .full-width { grid-column:auto; } }
+
+
+/* =========================================================
+   CEC PHASE 2 — FACULTY CLASS PERFORMANCE SNAPSHOT
+   Faculty-specific fallback styling so the insight card remains
+   polished even if the shared phase stylesheet is cached/missed.
+========================================================= */
+.faculty-dashboard-page .phase2-faculty-insights {
+    position:relative;
+    overflow:hidden;
+    margin:20px 0 24px;
+    padding:24px;
+    border:1px solid rgba(18,44,73,.10);
+    border-radius:20px;
+    background:linear-gradient(145deg,#fff 0%,#f8fbff 100%);
+    box-shadow:0 12px 32px rgba(18,44,73,.07);
+}
+.faculty-dashboard-page .phase2-faculty-insights::before {
+    content:"";
+    position:absolute;
+    left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg,#175cd3,#5b8def,transparent);
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-card-heading {
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+}
+.faculty-dashboard-page .phase2-faculty-insights .eyebrow {
+    display:inline-flex;
+    align-items:center;
+    padding:5px 9px;
+    border:1px solid rgba(23,92,211,.13);
+    border-radius:7px;
+    background:#f3f7ff;
+    color:#175cd3;
+    font-size:10px;
+    font-weight:850;
+    letter-spacing:.08em;
+}
+.faculty-dashboard-page .phase2-faculty-insights h3 {
+    margin:7px 0 0;
+    color:#102a43;
+    font-size:19px;
+    line-height:1.25;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-live-badge {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
+    padding:7px 11px;
+    border-radius:999px;
+    background:#eef5ff;
+    color:#175cd3;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.04em;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-live-badge::before {
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:#22a06b;
+    box-shadow:0 0 0 3px rgba(34,160,107,.12);
+}
+.faculty-dashboard-page .phase2-faculty-insights .metric-grid {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    margin:0 0 18px;
+}
+.faculty-dashboard-page .phase2-faculty-insights .metric {
+    min-width:0;
+    padding:16px;
+    border:1px solid rgba(18,44,73,.08);
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 4px 14px rgba(18,44,73,.04);
+}
+.faculty-dashboard-page .phase2-faculty-insights .metric b {
+    display:block;
+    color:#122c49;
+    font-size:24px;
+    line-height:1.1;
+}
+.faculty-dashboard-page .phase2-faculty-insights .metric span {
+    display:block;
+    margin-top:6px;
+    color:#6b7785;
+    font-size:11px;
+    line-height:1.35;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-risk-list {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:0;
+    padding:8px;
+    border:1px solid rgba(18,44,73,.08);
+    border-radius:15px;
+    background:#f8fafc;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-risk-row {
+    display:grid;
+    grid-template-columns:minmax(160px,1.6fr) 1fr 1fr auto;
+    gap:12px;
+    align-items:center;
+    padding:13px 14px;
+    border:1px solid rgba(18,44,73,.07);
+    border-radius:13px;
+    background:#fff;
+    color:#344054;
+    font-size:12px;
+    box-shadow:0 2px 8px rgba(18,44,73,.025);
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-risk-row > span:first-child {
+    font-weight:750;
+    color:#173b63;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-status {
+    display:inline-flex;
+    justify-self:end;
+    align-items:center;
+    justify-content:center;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+}
+.faculty-dashboard-page .phase2-faculty-insights .phase2-status.success { background:#e8f7ef;color:#157347; }
+.faculty-dashboard-page .phase2-faculty-insights .phase2-status.warning { background:#fff4d7;color:#8a5a00; }
+.faculty-dashboard-page .phase2-faculty-insights .phase2-status.danger { background:#fdeaea;color:#b42318; }
+.faculty-dashboard-page .phase2-faculty-insights .phase2-muted {
+    margin:14px 2px 0;
+    color:#6b7785;
+    font-size:11px;
+    line-height:1.55;
+}
+.faculty-dashboard-page .phase2-faculty-insights .empty {
+    padding:20px;
+    text-align:center;
+    color:#7b8794;
+    font-size:12px;
+}
+@media(max-width:900px){
+    .faculty-dashboard-page .phase2-faculty-insights .metric-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .faculty-dashboard-page .phase2-faculty-insights .phase2-risk-row { grid-template-columns:1fr 1fr; }
+    .faculty-dashboard-page .phase2-faculty-insights .phase2-status { justify-self:start; }
+}
+@media(max-width:560px){
+    .faculty-dashboard-page .phase2-faculty-insights { padding:18px; border-radius:16px; }
+    .faculty-dashboard-page .phase2-faculty-insights .phase2-card-heading { flex-direction:column; }
+    .faculty-dashboard-page .phase2-faculty-insights .metric-grid { grid-template-columns:1fr 1fr; gap:8px; }
+    .faculty-dashboard-page .phase2-faculty-insights .metric { padding:13px; }
+    .faculty-dashboard-page .phase2-faculty-insights .phase2-risk-row { grid-template-columns:1fr; gap:7px; }
+}
+
+/* ====================================================================
+   ATTENDANCE — TAB BAR
+   ==================================================================== */
+.att-tab-bar {
+    display:flex;gap:4px;
+    margin:0 0 20px;
+    padding:4px;
+    background:#f2f4f7;
+    border-radius:12px;
+    width:fit-content;
+}
+.att-tab-btn {
+    padding:8px 20px;
+    border:none;border-radius:9px;
+    background:transparent;
+    color:#667085;
+    font-size:13px;font-weight:600;
+    cursor:pointer;transition:all .18s ease;
+}
+.att-tab-btn.active {
+    background:#fff;color:#175cd3;
+    box-shadow:0 1px 6px rgba(18,44,73,.10);
+}
+.att-tab-btn:hover:not(.active) { background:#e8edf5;color:#344054; }
+
+/* ====================================================================
+   ATTENDANCE HISTORY — FILTERS
+   ==================================================================== */
+.att-history-filters {
+    display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;
+    padding:14px 16px;
+    background:#f8fafc;
+    border:1px solid #e4e7ec;
+    border-radius:12px;
+    margin-bottom:16px;
+}
+.att-history-filters label {
+    display:flex;flex-direction:column;gap:4px;
+    font-size:11px;font-weight:600;color:#667085;
+    min-width:100px;
+}
+.att-history-filters input,
+.att-history-filters select {
+    padding:7px 10px;
+    border:1px solid #d0d5dd;border-radius:8px;
+    font-size:13px;color:#344054;
+    background:#fff;
+}
+.att-history-filters button {
+    align-self:flex-end;
+}
+
+/* ====================================================================
+   ATTENDANCE HISTORY — SUMMARY METRICS ROW
+   ==================================================================== */
+.att-summary-row {
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-bottom:20px;
+}
+.att-metric {
+    flex:1;min-width:100px;
+    padding:14px 16px;
+    border-radius:12px;
+    border:1px solid transparent;
+    text-align:center;
+}
+.att-metric b  { display:block;font-size:26px;font-weight:800;line-height:1.1; }
+.att-metric span { display:block;font-size:11px;font-weight:600;margin-top:4px; }
+.att-metric.present { background:#e8f7ef;border-color:#b5e8cc;color:#157347; }
+.att-metric.absent  { background:#fdeaea;border-color:#f9c0bc;color:#b42318; }
+.att-metric.late    { background:#fff4d7;border-color:#f5d97a;color:#8a5a00; }
+.att-metric.excused { background:#eef5ff;border-color:#c7dcff;color:#175cd3; }
+.att-metric.total   { background:#f2f4f7;border-color:#d0d5dd;color:#344054; }
+
+/* ====================================================================
+   ATTENDANCE HISTORY — % BADGES
+   ==================================================================== */
+.att-pct-badge {
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:48px;padding:4px 10px;
+    border-radius:999px;font-size:11px;font-weight:800;
+}
+.att-pct-badge.green  { background:#dcfce7;color:#15803d; }
+.att-pct-badge.yellow { background:#fef9c3;color:#854d0e; }
+.att-pct-badge.red    { background:#fee2e2;color:#b91c1c; }
+
+/* ====================================================================
+   ATTENDANCE HISTORY — LOW ATTENDANCE ALERT BANNER
+   ==================================================================== */
+.att-low-alert {
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+    padding:12px 16px;
+    background:#fef3c7;
+    border:1px solid #fcd34d;
+    border-radius:12px;
+    color:#92400e;
+    font-size:13px;
+    margin-bottom:16px;
+}
+.att-low-alert b { font-weight:700; }
+.att-low-alert span {
+    display:inline-flex;padding:2px 8px;
+    background:#fffbeb;border-radius:6px;
+    font-weight:600;font-size:12px;
+}
+
+/* ====================================================================
+   ATTENDANCE HISTORY — SECTION TITLE
+   ==================================================================== */
+.att-section-title {
+    font-size:13px;font-weight:700;color:#344054;
+    margin:20px 0 10px;
+    padding-bottom:6px;
+    border-bottom:2px solid #e4e7ec;
+}
+
+/* ====================================================================
+   ANNOUNCEMENT BADGES (faculty feed)
+   ==================================================================== */
+.ann-pinned-badge {
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:999px;
+    background:#fff8e6;color:#92580a;
+    border:1px solid #f5d97a;
+    font-size:10px;font-weight:700;
+}
+.ann-priority-badge {
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:999px;
+    background:#fdeaea;color:#b42318;
+    border:1px solid #f9c0bc;
+    font-size:10px;font-weight:700;
+}
+.announcement-top { display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px; }
+
+@media(max-width:700px){
+    .att-summary-row { flex-direction:column; }
+    .att-metric { min-width:0; }
+    .att-history-filters { flex-direction:column; }
+    .att-history-filters label { min-width:0;width:100%; }
+    .att-tab-bar { width:100%; }
+    .att-tab-btn { flex:1;text-align:center; }
+}
+
+
+/* ===== FACULTY DASHBOARD REDESIGN 2026 ===== */
+
+/* Welcome bar */
+.faculty-welcome-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(135deg,#1e40af,#2563eb);border-radius:12px;margin-bottom:20px;color:#fff;gap:12px}
+.faculty-welcome-left{display:flex;flex-direction:column;gap:3px;min-width:0}
+.faculty-welcome-greeting{font-size:.95rem;font-weight:400;line-height:1.3}
+.faculty-welcome-greeting strong{font-size:1.05rem;font-weight:700}
+.faculty-welcome-dept{font-size:.75rem;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.faculty-welcome-date{font-size:.75rem;opacity:.85;white-space:nowrap;flex-shrink:0;color:#fff}
+
+/* KPI Cards */
+.faculty-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.faculty-kpi-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:box-shadow .18s}
+.faculty-kpi-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.faculty-kpi-card b{font-size:1.6rem;font-weight:800;line-height:1;color:#111827;display:block}
+.faculty-kpi-card span{font-size:.7rem;color:#6b7280;display:block;margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.faculty-kpi-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.kpi-blue{background:#dbeafe;color:#1d4ed8}
+.kpi-green{background:#dcfce7;color:#16a34a}
+.kpi-purple{background:#ede9fe;color:#7c3aed}
+.kpi-orange{background:#ffedd5;color:#ea580c}
+
+/* Quick Actions */
+.faculty-quick-actions{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.faculty-quick-btn{display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:.83rem;font-weight:600;transition:all .18s;flex:1;min-width:130px}
+.faculty-quick-btn span{font-size:.95rem}
+.fqb-blue{background:#dbeafe;color:#1d4ed8}.fqb-blue:hover{background:#bfdbfe}
+.fqb-purple{background:#ede9fe;color:#7c3aed}.fqb-purple:hover{background:#ddd6fe}
+.fqb-teal{background:#ccfbf1;color:#0f766e}.fqb-teal:hover{background:#99f6e4}
+.fqb-orange{background:#ffedd5;color:#ea580c}.fqb-orange:hover{background:#fed7aa}
+
+/* Dashboard 2-column grid */
+.faculty-dash-grid{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:20px}
+.faculty-dash-col{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;overflow:hidden;min-width:0}
+.faculty-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.faculty-section-head h4{font-size:.85rem;font-weight:700;color:#111827;margin:0}
+.text-link{background:none;border:none;color:#1d4ed8;font-size:.78rem;cursor:pointer;padding:0;text-decoration:none;font-weight:500}
+.text-link:hover{text-decoration:underline}
+
+/* Class rows in dashboard */
+.faculty-classes-list{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto}
+.faculty-class-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f9fafb;border:1px solid #f3f4f6;border-radius:8px;gap:8px;flex-wrap:wrap;transition:background .15s}
+.faculty-class-row:hover{background:#f0f4ff}
+.faculty-class-info{flex:1;min-width:0}
+.faculty-class-info strong{font-size:.83rem;font-weight:600;color:#111827;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.faculty-class-meta{font-size:.7rem;color:#6b7280;display:block}
+.faculty-class-actions{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.faculty-class-count{font-size:.72rem;color:#6b7280;white-space:nowrap;margin-right:4px}
+
+/* Attention table */
+.faculty-attention-table td{vertical-align:middle;padding:8px 10px}
+.faculty-attention-table small{display:block;color:#6b7280;font-size:.7rem}
+.faculty-attention-table strong{font-size:.83rem}
+
+/* Class cards grid (My Classes view) */
+.faculty-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:16px;margin-top:8px}
+.faculty-class-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:box-shadow .18s,transform .18s}
+.faculty-class-card:hover{box-shadow:0 5px 16px rgba(0,0,0,.1);transform:translateY(-1px)}
+.fcc-header{display:flex;align-items:center;justify-content:space-between}
+.fcc-code{background:#dbeafe;color:#1d4ed8;font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:5px;letter-spacing:.04em}
+.fcc-semester{font-size:.7rem;color:#6b7280}
+.fcc-subject{font-size:.98rem;font-weight:700;color:#111827;margin:0;line-height:1.3}
+.fcc-section{font-size:.78rem;color:#6b7280;margin:0}
+.fcc-stats{display:flex;gap:10px;flex-wrap:wrap;padding:8px 0;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6}
+.fcc-stats span{font-size:.76rem;color:#374151}
+.fcc-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+.fcc-actions .primary-btn,.fcc-actions .secondary-btn{padding:6px 11px;font-size:.76rem}
+.fcc-actions .secondary-btn{padding:6px 11px;font-size:.76rem}
+
+/* Responsive */
+@media(max-width:1024px){
+    .faculty-kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+    .faculty-dash-grid{grid-template-columns:1fr}
+    .faculty-quick-btn{min-width:calc(50% - 5px);flex:1 1 calc(50% - 5px)}
+}
+@media(max-width:600px){
+    .faculty-kpi-grid{grid-template-columns:repeat(2,1fr)}
+    .faculty-quick-actions{flex-wrap:wrap}
+    .faculty-card-grid{grid-template-columns:1fr}
+    .faculty-welcome-bar{flex-direction:column;align-items:flex-start;gap:6px}
+    .faculty-class-row{flex-direction:column;align-items:flex-start}
+    .faculty-class-actions{width:100%;justify-content:flex-start}
+}
+
+/* ===== FACULTY PORTAL — TYPOGRAPHY & PANEL SIZE FIXES ===== */
+/* Reduce the oversized panel heading that appears across all faculty pages */
+.faculty-dashboard-page .panel-header h2,
+.faculty-grades-page .panel-header h2,
+.faculty-classes-page .panel-header h2,
+.faculty-profile-page .panel-header h2,
+.faculty-attendance-page .panel-header h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e3a5f;
+}
+
+.faculty-dashboard-page .panel-header .eyebrow,
+.faculty-grades-page .panel-header .eyebrow,
+.faculty-classes-page .panel-header .eyebrow,
+.faculty-profile-page .panel-header .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+/* Tighten legacy .metric cards used in old panel() outputs */
+.faculty-dashboard-page .metric,
+.faculty-grades-page .metric,
+.faculty-classes-page .metric {
+    padding: 12px 14px;
+}
+.faculty-dashboard-page .metric b,
+.faculty-grades-page .metric b,
+.faculty-classes-page .metric b {
+    font-size: 1.3rem;
+}
+.faculty-dashboard-page .metric span,
+.faculty-grades-page .metric span,
+.faculty-classes-page .metric span {
+    font-size: 0.68rem;
+    margin-top: 3px;
+}
+
+/* Compact .info-box in faculty portal */
+.faculty-dashboard-page .info-box,
+.faculty-grades-page .info-box,
+.faculty-classes-page .info-box,
+.faculty-attendance-page .info-box {
+    font-size: 0.82rem;
+    padding: 10px 13px;
+}
+
+/* Grade table tweaks */
+.faculty-grades-page .data-table td,
+.faculty-dashboard-page .data-table td {
+    font-size: 0.82rem;
+    padding: 8px 10px;
+}
+.faculty-grades-page .data-table th,
+.faculty-dashboard-page .data-table th {
+    font-size: 0.72rem;
+    padding: 8px 10px;
+}
+
+/* Phase2 faculty insights — reduce text sizes */
+.faculty-dashboard-page .phase2-card-heading h3 { font-size: 0.88rem; }
+.faculty-dashboard-page .phase2-card-heading .eyebrow { font-size: 0.65rem; }
+.faculty-dashboard-page .phase2-muted { font-size: 0.72rem; }
+.faculty-dashboard-page .phase2-risk-row { font-size: 0.8rem; padding: 6px 0; }
+
+/* Sidebar profile name fix — prevent overflow */
+.sidebar-profile strong { font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; display: block; }
+.sidebar-profile span { font-size: 0.7rem; }

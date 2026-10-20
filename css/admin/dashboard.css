@@ -1,0 +1,110 @@
+﻿
+/* ===== ADMIN DASHBOARD REDESIGN ===== */
+.admin-dashboard-page .adm-welcome-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 100%);
+    border-radius:12px; padding:14px 20px; color:#fff; margin-bottom:14px;
+}
+.admin-dashboard-page .adm-welcome-left { display:flex; flex-direction:column; gap:3px; }
+.admin-dashboard-page .adm-greeting { font-size:.95rem; font-weight:600; }
+.admin-dashboard-page .adm-greeting strong { font-weight:800; }
+.admin-dashboard-page .adm-sub { font-size:.73rem; opacity:.82; }
+.admin-dashboard-page .adm-date { font-size:.72rem; opacity:.78; white-space:nowrap; }
+
+.admin-dashboard-page .adm-kpi-grid {
+    display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-bottom:12px;
+}
+.admin-dashboard-page .adm-kpi-card {
+    display:flex; align-items:center; gap:9px; cursor:pointer;
+    background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:11px 12px;
+    transition:box-shadow .15s;
+}
+.admin-dashboard-page .adm-kpi-card:hover { box-shadow:0 4px 12px rgba(0,0,0,.08); }
+.admin-dashboard-page .adm-kpi-card b { display:block; font-size:1.15rem; color:#111827; line-height:1.1; }
+.admin-dashboard-page .adm-kpi-card span { display:block; font-size:.65rem; color:#6b7280; margin-top:2px; }
+.admin-dashboard-page .adm-kpi-icon {
+    width:32px; height:32px; border-radius:8px; font-size:1rem;
+    display:grid; place-items:center; flex-shrink:0;
+}
+.admin-dashboard-page .adm-kpi-icon.kpi-blue   { background:#dbeafe; }
+.admin-dashboard-page .adm-kpi-icon.kpi-purple { background:#ede9fe; }
+.admin-dashboard-page .adm-kpi-icon.kpi-teal   { background:#ccfbf1; }
+.admin-dashboard-page .adm-kpi-icon.kpi-orange { background:#ffedd5; }
+.admin-dashboard-page .adm-kpi-icon.kpi-green  { background:#d1fae5; }
+.admin-dashboard-page .adm-kpi-icon.kpi-red    { background:#fee2e2; }
+
+.admin-dashboard-page .adm-quick-actions {
+    display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;
+}
+.admin-dashboard-page .adm-quick-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:9px 14px; border-radius:8px; font-size:.78rem; font-weight:700;
+    cursor:pointer; border:none; transition:opacity .15s;
+}
+.admin-dashboard-page .adm-quick-btn:hover { opacity:.85; }
+.admin-dashboard-page .adm-quick-btn span { font-size:1rem; }
+.admin-dashboard-page .aqb-blue   { background:#dbeafe; color:#1e40af; }
+.admin-dashboard-page .aqb-purple { background:#ede9fe; color:#5b21b6; }
+.admin-dashboard-page .aqb-orange { background:#ffedd5; color:#9a3412; }
+.admin-dashboard-page .aqb-teal   { background:#ccfbf1; color:#065f46; }
+.admin-dashboard-page .aqb-green  { background:#d1fae5; color:#166534; }
+
+.admin-dashboard-page .adm-dash-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;
+}
+.admin-dashboard-page .adm-dash-col {
+    background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px 16px;
+}
+.admin-dashboard-page .adm-section-head {
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.admin-dashboard-page .adm-section-head h4 { margin:0; font-size:.85rem; color:#1e3a5f; }
+.admin-dashboard-page .text-link {
+    font-size:.72rem; color:#2563eb; background:none; border:none;
+    cursor:pointer; padding:0; font-weight:600;
+}
+
+.admin-dashboard-page .adm-ann-list { display:flex; flex-direction:column; gap:7px; }
+.admin-dashboard-page .adm-ann-item {
+    display:flex; align-items:flex-start; gap:6px;
+    padding:8px 10px; background:#f9fafb; border-radius:8px;
+}
+.admin-dashboard-page .adm-ann-body { flex:1; }
+.admin-dashboard-page .adm-ann-title { font-size:.82rem; font-weight:700; color:#111827; }
+.admin-dashboard-page .adm-ann-meta { font-size:.7rem; color:#6b7280; margin-top:2px; }
+.admin-dashboard-page .adm-audience-chip {
+    display:inline-block; font-size:.65rem; padding:1px 6px;
+    border-radius:10px; font-weight:700;
+}
+.admin-dashboard-page .adm-aud-general  { background:#e0f2fe; color:#0369a1; }
+.admin-dashboard-page .adm-aud-students { background:#dcfce7; color:#166534; }
+.admin-dashboard-page .adm-aud-faculty  { background:#ede9fe; color:#5b21b6; }
+
+.admin-dashboard-page .adm-low-list { display:flex; flex-direction:column; gap:6px; margin-top:6px; }
+.admin-dashboard-page .adm-low-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:7px 10px; background:#fef2f2; border-radius:8px;
+}
+.admin-dashboard-page .adm-low-name { font-size:.8rem; color:#111827; }
+.admin-dashboard-page .adm-pending-box {
+    margin-top:10px; padding:9px 12px; background:#fff7ed;
+    border:1px solid #fed7aa; border-radius:8px; font-size:.8rem; color:#9a3412;
+}
+
+/* Admin typography improvements */
+.admin-dashboard-page .panel-header h2 { font-size:1.15rem; font-weight:700; color:#1e3a5f; }
+.admin-dashboard-page .metric { padding:12px 14px; }
+.admin-dashboard-page .metric b { font-size:1.3rem; }
+.admin-dashboard-page .metric span { font-size:.68rem; }
+.admin-dashboard-page .info-box { font-size:.82rem; padding:10px 13px; }
+.admin-dashboard-page .data-table td { font-size:.82rem; padding:8px 10px; }
+.admin-dashboard-page .data-table th { font-size:.72rem; padding:8px 10px; }
+
+@media(max-width:1100px){
+    .admin-dashboard-page .adm-kpi-grid { grid-template-columns:repeat(3,1fr); }
+}
+@media(max-width:750px){
+    .admin-dashboard-page .adm-kpi-grid { grid-template-columns:repeat(2,1fr); }
+    .admin-dashboard-page .adm-dash-grid { grid-template-columns:1fr; }
+    .admin-dashboard-page .adm-welcome-bar { flex-direction:column; align-items:flex-start; gap:4px; }
+}

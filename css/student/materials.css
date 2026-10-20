@@ -1,0 +1,9 @@
+/* Student materials page-specific styles */
+.materials-page .material-row { transition: background .2s ease; }
+
+.materials-page .material-info { min-width:0; }
+.materials-page .material-info p { margin:6px 0 0; color:#66747d; font-size:.9rem; }
+.materials-page .material-info small { overflow-wrap:anywhere; }
+.student-materials-page .material-info { min-width:0; }
+.student-materials-page .material-info p { margin:6px 0 0; color:#66747d; font-size:.9rem; }
+.student-materials-page .material-info small { overflow-wrap:anywhere; }

@@ -1,0 +1,57 @@
+/* Admin announcements page-specific styles */
+.admin-announcements-page .content-panel { transition: box-shadow .2s ease; }
+
+/* ── Audience chips ─────────────────────────────────── */
+.ann-audience-chip {
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:999px;
+    font-size:10px;font-weight:700;letter-spacing:.04em;
+    border:1px solid transparent;
+}
+.ann-audience-chip.general  { background:#eef5ff;color:#175cd3;border-color:#c7dcff; }
+.ann-audience-chip.ann-general  { background:#eef5ff;color:#175cd3;border-color:#c7dcff; }
+.ann-audience-chip.students { background:#e8f7ef;color:#157347;border-color:#b5e8cc; }
+.ann-audience-chip.ann-students { background:#e8f7ef;color:#157347;border-color:#b5e8cc; }
+.ann-audience-chip.faculty  { background:#fff4d7;color:#8a5a00;border-color:#f5d97a; }
+.ann-audience-chip.ann-faculty  { background:#fff4d7;color:#8a5a00;border-color:#f5d97a; }
+
+/* ── Pinned badge ────────────────────────────────────── */
+.ann-pinned-badge {
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:999px;
+    background:#fff8e6;color:#92580a;
+    border:1px solid #f5d97a;
+    font-size:10px;font-weight:700;
+}
+
+/* ── Priority badge ──────────────────────────────────── */
+.ann-priority-badge {
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:999px;
+    background:#fdeaea;color:#b42318;
+    border:1px solid #f9c0bc;
+    font-size:10px;font-weight:700;
+}
+
+/* ── Expired chip ────────────────────────────────────── */
+.ann-expired-chip {
+    display:inline-flex;align-items:center;
+    padding:3px 9px;border-radius:999px;
+    background:#f2f4f7;color:#667085;
+    border:1px solid #d0d5dd;
+    font-size:10px;font-weight:700;letter-spacing:.04em;
+}
+
+/* ── Expired card dimming ────────────────────────────── */
+.announcement-card.ann-expired {
+    opacity:.65;
+    border-left:3px solid #d0d5dd !important;
+}
+
+/* ── Admin card layout ───────────────────────────────── */
+.admin-ann-card .ann-admin-actions {
+    display:flex;gap:8px;margin-top:10px;
+}
+.admin-ann-card .announcement-top {
+    display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px;
+}

@@ -1,0 +1,2 @@
+/* Student announcements page-specific styles */
+.announcements-page .announcement-card { transition: box-shadow .2s ease; }

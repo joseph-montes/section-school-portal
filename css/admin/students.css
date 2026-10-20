@@ -1,0 +1,52 @@
+/* Admin students page-specific styles */
+.admin-students-page .content-panel { transition: box-shadow .2s ease; }
+
+
+/* Student management: searchable program categories */
+.admin-students-page .student-admin-tools{
+    display:grid;
+    grid-template-columns:minmax(240px,1fr) 280px auto;
+    gap:12px;
+    align-items:end;
+    margin-bottom:16px;
+}
+.admin-students-page .student-search-wrap{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    min-height:44px;
+    padding:0 13px;
+    background:#fff;
+    border:1px solid #d5e0ea;
+    border-radius:10px;
+}
+.admin-students-page .student-search-wrap span{font-size:22px;color:#1f4f8f;font-weight:800;line-height:1;}
+.admin-students-page .student-search-wrap input{
+    width:100%;border:0;outline:0;background:transparent;color:#203443;
+}
+.admin-students-page .student-program-filter{display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:800;color:#5d7080;}
+.admin-students-page .student-program-filter select{
+    min-height:44px;border:1px solid #d5e0ea;border-radius:10px;background:#fff;padding:0 12px;color:#203443;outline:none;
+}
+.admin-students-page .program-category-bar{
+    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:8px 0 12px;
+}
+.admin-students-page .program-category{
+    display:flex;flex-direction:column;gap:3px;text-align:left;padding:11px 10px;background:#f4f7fb;border:1px solid #dbe4ee;border-radius:10px;color:#526777;
+}
+.admin-students-page .program-category b{color:#1f4f8f;font-size:12px;}
+.admin-students-page .program-category span{font-size:9px;}
+.admin-students-page .program-category.active{background:#eaf2fb;border-color:#1f4f8f;box-shadow:0 0 0 1px #1f4f8f inset;}
+.admin-students-page .student-result-summary{font-size:11px;color:#6c7d89;margin:8px 0 10px;}
+.admin-students-page .status-chip.not-registered{background:#fff4d6;color:#8a6200;}
+.admin-students-page .status-chip.active{background:#e7f5ec;color:#1d7445;}
+@media(max-width:900px){
+    .admin-students-page .student-admin-tools{grid-template-columns:1fr 1fr;}
+    .admin-students-page .student-admin-tools .primary-btn{grid-column:1/-1;}
+    .admin-students-page .program-category-bar{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media(max-width:560px){
+    .admin-students-page .student-admin-tools{grid-template-columns:1fr;}
+    .admin-students-page .student-admin-tools .primary-btn{grid-column:auto;}
+    .admin-students-page .program-category-bar{grid-template-columns:repeat(2,minmax(0,1fr));}
+}

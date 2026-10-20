@@ -1,0 +1,887 @@
+/* =========================================================
+   CEC PORTAL - LANDING PAGE
+   Matches the original CEC Portal reference design.
+   These styles intentionally override shared global styles
+   only for the public landing page.
+========================================================= */
+
+.public-index-page {
+    color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.public-index-page #landingPage.page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #f5f7f8;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.public-index-page .public-header {
+    height: 62px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 35px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 0;
+    transition: background-color .25s ease, backdrop-filter .25s ease, box-shadow .25s ease;
+}
+
+.public-index-page .brand {
+    gap: 7px;
+    color: #172b44;
+    letter-spacing: .5px;
+    font-size: 22px;
+}
+
+.public-index-page .brand img {
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+}
+
+.public-index-page .brand b {
+    font-weight: 400;
+    color: inherit;
+}
+
+.public-index-page .public-nav {
+    display: flex;
+    gap: 30px;
+    margin: auto;
+}
+
+.public-index-page .public-nav button {
+    background: transparent;
+    color: #111;
+    padding: 0;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.public-index-page .public-nav button:hover,
+.public-index-page .public-nav button.active {
+    background: transparent;
+    color: #111;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.public-index-page .top-login-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.public-index-page .login-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #425970;
+    color: #fff;
+    border-radius: 9px;
+    padding: 10px 30px;
+    font-size: 11px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.public-index-page .login-top:hover {
+    background: #354b60;
+}
+
+.public-index-page .public-header.scrolled {
+    background: rgba(23, 52, 82, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.public-index-page .public-header.scrolled .brand {
+    color: #fff;
+}
+
+.public-index-page .public-header.scrolled .public-nav button {
+    color: #fff;
+}
+
+.public-index-page .public-header.scrolled .public-nav button:hover,
+.public-index-page .public-header.scrolled .public-nav button.active {
+    color: #fff;
+}
+
+.public-index-page .public-header.scrolled .login-top {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.public-index-page .public-header.scrolled .login-top:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.public-index-page .hero {
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    align-items: center;
+    gap: 0;
+    padding: 35px 35px 55px;
+    background: #f5f7f8;
+}
+
+.public-index-page .hero-copy {
+    padding-left: 3px;
+}
+
+.public-index-page .eyebrow {
+    font-size: 10px;
+    letter-spacing: .5px;
+    color: #52616f;
+    margin: 0 0 14px;
+}
+
+.public-index-page .hero-copy h1 {
+    font-size: 38px;
+    line-height: 1.08;
+    margin: 0 0 18px;
+    color: #173452;
+}
+
+.public-index-page .hero-copy h1 span {
+    color: #08a79b;
+}
+
+.public-index-page .hero-text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #4b5358;
+    max-width: 310px;
+    margin: 0 0 18px;
+}
+
+.public-index-page .hero-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 0;
+}
+
+.public-index-page .outline-btn {
+    border: 1px solid #11b4af;
+    color: #243c50;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 11px;
+    background: transparent;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.public-index-page .outline-btn:hover {
+    border-color: #1f4f8f;
+    color: #1f4f8f;
+    background: #fff;
+}
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.public-index-page .hero-visual {
+    position: relative;
+    min-height: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.public-index-page .shape {
+    position: absolute;
+    background: #7bd2c9;
+    border-radius: 9px;
+    opacity: 1;
+}
+
+.public-index-page .shape-one {
+    width: 95px;
+    height: 44px;
+    left: 7%;
+    top: 4%;
+}
+
+.public-index-page .shape-two {
+    width: 95px;
+    height: 48px;
+    right: 4%;
+    bottom: 5%;
+}
+
+.public-index-page .campus-frame {
+    position: relative;
+    width: 88%;
+    max-width: 580px;
+    height: 255px;
+    border: 1px solid #738a9b;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    z-index: 2;
+    box-shadow: none;
+}
+
+.public-index-page .campus-frame > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(.9);
+    display: block;
+}
+
+.public-index-page .campus-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 2px #0008;
+    color: #fff;
+    background: linear-gradient(#0019, #0010 40%, #001c);
+    padding: 0;
+}
+
+.public-index-page .campus-overlay img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.public-index-page .campus-overlay strong {
+    font-size: 11px;
+}
+
+.public-index-page .campus-overlay span {
+    margin-top: 35px;
+    color: #ffe06b;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.public-index-page .campus-overlay small {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+/* =========================================================
+   ABOUT / PROGRAM / CONTACT
+========================================================= */
+
+.public-index-page .public-section {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 45px 70px;
+    border-top: 1px solid #dde3e8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: #fff;
+}
+
+.public-index-page .public-section h2 {
+    color: #173452;
+    margin: 0;
+    font-size: 28px;
+}
+
+.public-index-page .public-section > p {
+    color: #59636d;
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+.public-index-page .programs {
+    display: block;
+    background: #f5f7f8;
+}
+
+.public-index-page .program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.public-index-page .program-grid article {
+    background: #fff;
+    border: 1px solid #dfe6ec;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.public-index-page .program-grid span {
+    color: #0ba79e;
+    font-size: 11px;
+}
+
+.public-index-page .program-grid h3 {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #173452;
+}
+
+.public-index-page .program-grid p {
+    margin: 0;
+    font-size: 12px;
+    color: #68737d;
+    line-height: 1.4;
+}
+
+.public-index-page .contact-section {
+    padding-bottom: 70px;
+}
+
+
+/* =========================================================
+   ABOUT DESIGN - INSPIRED BY GROUP1 REFERENCE
+   Navigation and existing landing-page behavior remain unchanged.
+========================================================= */
+
+.public-index-page .cec-about-design {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 65px 30px;
+    border-top: 0;
+    background-image: url("../../assets/landing-about_bg.png");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.public-index-page .cec-about-card {
+    width: min(760px, 88%);
+    padding: 42px 50px;
+    border: 1px solid rgba(0, 0, 0, .45);
+    border-radius: 20px;
+    background: rgba(217, 217, 217, .42);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(24, 47, 65, .08);
+}
+
+.public-index-page .cec-about-label {
+    margin: 0 0 12px;
+    color: #44525e;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.public-index-page .cec-about-card h2 {
+    margin: 0 0 18px;
+    color: #173452;
+    font-size: 29px;
+    line-height: 1.15;
+}
+
+.public-index-page .cec-about-card > p:last-child {
+    margin: 0;
+    color: #202a31;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+/* =========================================================
+   CONTACT DESIGN - INSPIRED BY GROUP1 REFERENCE
+========================================================= */
+
+.public-index-page .cec-contact-design {
+    display: block;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 42px 30px 55px;
+    background: #c3d3e2;
+    border-top: 0;
+}
+
+.public-index-page .cec-contact-heading {
+    width: min(900px, 94%);
+    margin: 0 auto 28px;
+    text-align: center;
+}
+
+.public-index-page .cec-contact-heading h2 {
+    margin: 0 0 10px;
+    color: #173452;
+    font-size: 28px;
+}
+
+.public-index-page .cec-contact-heading > p:last-child {
+    margin: 0 auto;
+    max-width: 620px;
+    color: #4f5b65;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.public-index-page .cec-contact-list {
+    width: min(900px, 94%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.public-index-page .cec-contact-item {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    align-items: center;
+    column-gap: clamp(20px, 5vw, 55px);
+}
+
+.public-index-page .cec-contact-logo {
+    width: clamp(62px, 9vw, 82px);
+    height: clamp(62px, 9vw, 82px);
+    margin: auto;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.public-index-page .cec-contact-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.public-index-page .cec-contact-card {
+    width: 100%;
+    min-height: 78px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.public-index-page .cec-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 7px;
+    color: #333;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.public-index-page .cec-contact-row:last-child {
+    margin-bottom: 0;
+}
+
+.public-index-page .cec-icon {
+    width: 18px;
+    min-width: 18px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .public-index-page .hero,
+    .public-index-page .public-section,
+    .public-index-page .cec-about-design,
+    .public-index-page .cec-contact-design {
+        min-height: auto;
+    }
+    .public-index-page .cec-about-design {
+        min-height: 430px;
+        padding: 35px 15px;
+    }
+
+    .public-index-page .cec-about-card {
+        width: 96%;
+        padding: 30px 25px;
+        border-radius: 16px;
+    }
+
+    .public-index-page .cec-about-card h2 {
+        font-size: 24px;
+    }
+
+    .public-index-page .cec-about-card > p:last-child {
+        font-size: 12px;
+        line-height: 1.65;
+    }
+
+    .public-index-page .cec-contact-design {
+        padding: 35px 10px 55px;
+    }
+
+    .public-index-page .cec-contact-list,
+    .public-index-page .cec-contact-heading {
+        width: 96%;
+    }
+
+    .public-index-page .cec-contact-item {
+        grid-template-columns: 60px minmax(0, 1fr);
+        column-gap: 12px;
+    }
+
+    .public-index-page .cec-contact-logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    .public-index-page .cec-contact-card {
+        min-height: 67px;
+        padding: 8px 9px;
+    }
+
+    .public-index-page .cec-contact-row {
+        font-size: 8px;
+        gap: 5px;
+        margin-bottom: 5px;
+    }
+
+    .public-index-page .cec-icon {
+        width: 15px;
+        min-width: 15px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 400px) {
+    .public-index-page .cec-about-card {
+        width: 98%;
+        padding: 25px 20px;
+    }
+
+    .public-index-page .cec-contact-item {
+        grid-template-columns: 52px minmax(0, 1fr);
+        column-gap: 10px;
+    }
+
+    .public-index-page .cec-contact-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .public-index-page .cec-contact-card {
+        padding: 7px;
+    }
+
+    .public-index-page .cec-contact-row {
+        font-size: 7px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    /* Full-height desktop sections; natural height on smaller screens for readability */
+    .public-index-page .hero,
+    .public-index-page .public-section,
+    .public-index-page .cec-about-design,
+    .public-index-page .cec-contact-design {
+        min-height: calc(100vh - 62px);
+    }
+
+
+    .public-index-page .public-header {
+        padding: 0 15px;
+        gap: 15px;
+    }
+
+    .public-index-page .public-nav {
+        gap: 12px;
+    }
+
+    .public-index-page .hero {
+        grid-template-columns: 1fr;
+        padding: 30px 25px;
+    }
+
+    .public-index-page .hero-copy {
+        order: 1;
+    }
+
+    .public-index-page .hero-visual {
+        order: 0;
+    }
+
+    .public-index-page .hero-copy h1 {
+        font-size: 32px;
+    }
+
+    .public-index-page .public-section {
+        padding: 35px 25px;
+        grid-template-columns: 1fr;
+    }
+
+    .public-index-page .program-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .public-index-page .brand span {
+        font-size: 16px;
+    }
+
+    .public-index-page .public-nav {
+        display: none;
+    }
+
+    .public-index-page .login-top {
+        margin-left: auto;
+        padding: 9px 18px;
+    }
+
+    .public-index-page .hero {
+        padding-top: 92px;
+    }
+
+    .public-index-page .hero-visual {
+        min-height: 210px;
+        margin-top: 10px;
+    }
+
+    .public-index-page .campus-frame {
+        height: 190px;
+        width: 100%;
+    }
+}
+
+
+/* Fixed transparent navigation: keep section titles clear of the header. */
+.public-index-page #home,
+.public-index-page #about,
+.public-index-page #program,
+.public-index-page #contact {
+    scroll-margin-top: 62px;
+}
+
+@media (max-width: 850px) {
+    .public-index-page .public-header {
+        position: fixed;
+    }
+}
+
+/* =========================================================
+   MOBILE LANDING-PAGE MENU
+   Mirrors the Student Dashboard drawer behavior without
+   changing the desktop navigation or existing page content.
+========================================================= */
+.public-index-page .landing-mobile-menu-btn {
+    display:none;
+    flex:0 0 40px;
+    width:40px;
+    height:40px;
+    margin-left:8px;
+    border-radius:9px;
+    background:#edf3fa;
+    color:#1f4f8f;
+    font-size:21px;
+    line-height:1;
+    align-items:center;
+    justify-content:center;
+    z-index:1002;
+}
+
+.public-index-page .landing-mobile-menu-overlay {
+    display:none;
+}
+
+.public-index-page .landing-mobile-menu-close {
+    display:none;
+}
+
+@media (max-width:520px) {
+    .public-index-page .public-header {
+        padding:0 12px;
+        gap:8px;
+    }
+
+    .public-index-page .brand {
+        min-width:0;
+        flex:1 1 auto;
+        overflow:hidden;
+    }
+
+    .public-index-page .brand span {
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .public-index-page .top-login-actions {
+        flex:0 0 auto;
+        margin-left:auto;
+    }
+
+    .public-index-page .login-top {
+        padding:9px 16px;
+        white-space:nowrap;
+    }
+
+    .public-index-page .landing-mobile-menu-btn {
+        display:inline-flex;
+    }
+
+    /* Turn the existing navigation into a left-side mobile drawer. */
+    .public-index-page .public-nav {
+        position:fixed;
+        left:0;
+        top:0;
+        bottom:0;
+        width:min(290px,84vw);
+        height:100vh;
+        margin:0;
+        padding:72px 14px 20px;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        justify-content:flex-start;
+        gap:4px;
+        background:#fff;
+        border-right:1px solid #dce6eb;
+        box-shadow:16px 0 35px rgba(18,39,53,.14);
+        overflow-y:auto;
+        transform:translateX(-105%);
+        transition:transform .24s ease;
+        z-index:1200;
+    }
+
+    .public-index-page .public-nav.mobile-open {
+        transform:translateX(0);
+    }
+
+    .public-index-page .public-nav button {
+        width:100%;
+        min-height:44px;
+        padding:11px 13px;
+        border-radius:7px;
+        text-align:left;
+        color:#526674;
+        background:transparent;
+        font-size:11px;
+        font-weight:800;
+    }
+
+    .public-index-page .public-nav button:hover,
+    .public-index-page .public-nav button.active {
+        background:#edf3fa;
+        color:#1f4f8f;
+        text-decoration:none;
+    }
+
+    .public-index-page .landing-mobile-menu-close {
+        display:block;
+        position:absolute;
+        top:18px;
+        right:18px;
+        width:auto;
+        height:auto;
+        margin:0;
+        padding:0 2px;
+        border:0;
+        border-radius:0;
+        background:transparent;
+        color:#526674;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:27px;
+        font-weight:400;
+        line-height:1;
+        z-index:1;
+        box-shadow:none;
+    }
+
+    .public-index-page .landing-mobile-menu-close:hover,
+    .public-index-page .landing-mobile-menu-close:focus {
+        background:transparent;
+        color:#173452;
+        box-shadow:none;
+        outline:none;
+    }
+
+    .public-index-page .landing-mobile-menu-overlay {
+        position:fixed;
+        inset:0;
+        display:block;
+        background:rgba(18,39,53,.34);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity .24s ease, visibility .24s ease;
+        z-index:1100;
+    }
+
+    .public-index-page .landing-mobile-menu-overlay.show {
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+    }
+
+    .public-index-page.mobile-menu-open {
+        overflow:hidden;
+    }
+}
+
+@media (max-width:380px) {
+    .public-index-page .public-header {
+        padding:0 9px;
+        gap:5px;
+    }
+
+    .public-index-page .brand img {
+        width:29px;
+        height:29px;
+    }
+
+    .public-index-page .brand span {
+        font-size:14px;
+    }
+
+    .public-index-page .login-top {
+        padding:8px 12px;
+        font-size:10px;
+    }
+
+    .public-index-page .landing-mobile-menu-btn {
+        width:38px;
+        height:38px;
+        flex-basis:38px;
+        margin-left:3px;
+    }
+}

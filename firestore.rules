@@ -1,0 +1,352 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function facultyTeacherId() {
+      return get(/databases/$(database)/documents/facultyRoles/$(request.auth.uid)).data.teacherId;
+    }
+
+    function isFaculty() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/facultyRoles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/facultyRoles/$(request.auth.uid)).data.role == 'faculty'
+        && get(/databases/$(database)/documents/facultyRoles/$(request.auth.uid)).data.email == request.auth.token.email
+        && exists(/databases/$(database)/documents/teachers/$(facultyTeacherId()))
+        && get(/databases/$(database)/documents/teachers/$(facultyTeacherId())).data.status == 'Active'
+        && get(/databases/$(database)/documents/teachers/$(facultyTeacherId())).data.email == request.auth.token.email;
+    }
+
+    function isStudent() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/userRoles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.role == 'student';
+    }
+
+    function studentIdForUser() {
+      return get(/databases/$(database)/documents/userRoles/$(request.auth.uid)).data.studentId;
+    }
+
+    function ownStudent() {
+      return isStudent() && resource.data.id == studentIdForUser();
+    }
+
+    function ownIncomingStudent() {
+      return isStudent() && request.resource.data.id == studentIdForUser();
+    }
+
+    function assignedSubject(code) {
+      return isFaculty()
+        && exists(/databases/$(database)/documents/subjects/$(code))
+        && get(/databases/$(database)/documents/subjects/$(code)).data.teacherId == facultyTeacherId();
+    }
+
+    function facultyStudentAccessDoc(studentId) {
+      return exists(/databases/$(database)/documents/facultyStudentAccess/$(facultyTeacherId() + "__" + studentId));
+    }
+
+    function assignedStudent(studentId, firestoreId) {
+      // A Faculty grade must point to a real student document. The portal stores
+      // the public Student ID in data.id and the Firestore document ID separately.
+      return isFaculty()
+        && firestoreId != null
+        && exists(/databases/$(database)/documents/students/$(firestoreId))
+        && get(/databases/$(database)/documents/students/$(firestoreId)).data.id == studentId;
+    }
+
+    function assignedClass(classId, studentId, firestoreId, code) {
+      // Support both class studentIds formats used by older portal data: public
+      // Student IDs and Firestore student document IDs. Subject code also supports
+      // the legacy `code` field when `subjectCode` is absent.
+      return isFaculty()
+        && classId != null
+        && exists(/databases/$(database)/documents/classes/$(classId))
+        && (get(/databases/$(database)/documents/classes/$(classId)).data.teacherAuthUid == request.auth.uid
+            || get(/databases/$(database)/documents/classes/$(classId)).data.teacherId == facultyTeacherId())
+        && (
+          (get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['subjectCode'])
+            && get(/databases/$(database)/documents/classes/$(classId)).data.subjectCode == code)
+          ||
+          (!get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['subjectCode'])
+            && get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['code'])
+            && get(/databases/$(database)/documents/classes/$(classId)).data.code == code)
+        )
+        && get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['studentIds'])
+        && get(/databases/$(database)/documents/classes/$(classId)).data.studentIds.hasAny([studentId, firestoreId]);
+    }
+
+    match /userRoles/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid || isAdmin();
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == 'student'
+        && exists(/databases/$(database)/documents/studentLookup/$(request.resource.data.studentId))
+        && get(/databases/$(database)/documents/studentLookup/$(request.resource.data.studentId)).data.authUid == request.auth.uid
+        && get(/databases/$(database)/documents/studentLookup/$(request.resource.data.studentId)).data.registered == true;
+      allow update, delete: if isAdmin();
+    }
+
+    match /studentLookup/{studentId} {
+      // Student login uses this lookup before Firebase Authentication is
+      // established, so the existing pre-auth lookup behavior is preserved.
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin() || (signedIn()
+        && request.resource.data.authUid == request.auth.uid
+        && request.resource.data.registered == true
+        && resource.data.registered == false
+        && request.resource.data.registrationCodeHash == resource.data.registrationCodeHash
+        && request.resource.data.email == resource.data.email);
+      allow delete: if isAdmin();
+    }
+
+    match /facultyRoles/{uid} {
+      allow read: if (signedIn() && request.auth.uid == uid) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read: if (signedIn() && request.auth.uid == uid) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /students/{uid} {
+      allow read: if isAdmin()
+        || (isFaculty() && (
+          (resource.data.keys().hasAny(['facultyTeacherIds']) && resource.data.facultyTeacherIds.hasAny([facultyTeacherId()]))
+          || facultyStudentAccessDoc(resource.data.id)
+        ))
+        || (signedIn() && resource.data.authUid == request.auth.uid);
+      allow create: if isAdmin();
+      allow update: if isAdmin() || (signedIn() &&
+        ((request.auth.uid == resource.data.authUid && request.resource.data.id == resource.data.id && request.resource.data.authUid == resource.data.authUid) ||
+         ((!resource.data.keys().hasAny(['authUid']) || resource.data.authUid == null)
+          && request.resource.data.id == resource.data.id
+          && request.resource.data.authUid == request.auth.uid
+          && request.resource.data.email == resource.data.email
+          && exists(/databases/$(database)/documents/studentLookup/$(resource.data.id))
+          && get(/databases/$(database)/documents/studentLookup/$(resource.data.id)).data.authUid == request.auth.uid
+          && get(/databases/$(database)/documents/studentLookup/$(resource.data.id)).data.registered == true)));
+      allow delete: if isAdmin();
+    }
+
+    match /teachers/{id} {
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.authUid == request.auth.uid && resource.data.email == request.auth.token.email)
+        || (isFaculty() && id == facultyTeacherId() && resource.data.email == request.auth.token.email);
+      allow write: if isAdmin();
+    }
+
+    match /subjects/{id} {
+      allow read: if isAdmin() || isStudent() || (isFaculty() && resource.data.teacherId == facultyTeacherId());
+      allow write: if isAdmin();
+    }
+
+    // Canonical Admin -> Class -> Teacher -> Faculty relationship.
+    // Faculty clients subscribe directly to this collection with
+    // where('teacherId', '==', facultyTeacherId()).
+    match /classes/{id} {
+      // New records are linked directly to the Firebase Auth UID. teacherId
+      // remains supported for legacy records.
+      allow read: if isAdmin() || isStudent()
+        || (isFaculty() && (resource.data.teacherAuthUid == request.auth.uid || resource.data.teacherId == facultyTeacherId()));
+      allow write: if isAdmin();
+    }
+
+    match /facultyStudentAccess/{id} {
+      allow read: if isAdmin() || (isFaculty() && resource.data.teacherId == facultyTeacherId());
+      allow write: if isAdmin();
+    }
+
+    match /facultyAssignments/{id} {
+      allow read: if isAdmin() || (isFaculty() && resource.data.teacherId == facultyTeacherId());
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /grades/{id} {
+      // Admin is monitoring-only. Students can read their own grades.
+      allow read: if isAdmin()
+        || (isFaculty() && resource.data.teacherId == facultyTeacherId())
+        || (isStudent() && resource.data.studentId == studentIdForUser());
+
+      // The class is the authoritative Teacher -> Subject -> Student relationship.
+      // We intentionally do not require a separate /subjects/{code} lookup here,
+      // because older portals may have a class record even when the subject
+      // offering document is missing or has a legacy shape. assignedClass()
+      // verifies teacher, subject code, class, and student together.
+      allow create: if isFaculty()
+        && request.resource.data.teacherId == facultyTeacherId()
+        && assignedStudent(request.resource.data.studentId, request.resource.data.studentFirestoreId)
+        && assignedClass(request.resource.data.classId, request.resource.data.studentId, request.resource.data.studentFirestoreId, request.resource.data.code);
+
+      allow update: if isFaculty()
+        && resource.data.teacherId == facultyTeacherId()
+        && request.resource.data.teacherId == facultyTeacherId()
+        && request.resource.data.studentId == resource.data.studentId
+        && request.resource.data.code == resource.data.code
+        && assignedStudent(request.resource.data.studentId, request.resource.data.studentFirestoreId)
+        && assignedClass(request.resource.data.classId, request.resource.data.studentId, request.resource.data.studentFirestoreId, request.resource.data.code);
+
+      allow delete: if isAdmin();
+    }
+
+    function facultyAttendanceClassAccess(classId, studentId, studentFirestoreId) {
+      return isFaculty()
+        && classId != null
+        && studentId != null
+        && exists(/databases/$(database)/documents/classes/$(classId))
+        && (get(/databases/$(database)/documents/classes/$(classId)).data.teacherAuthUid == request.auth.uid
+            || get(/databases/$(database)/documents/classes/$(classId)).data.teacherId == facultyTeacherId())
+        && get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['studentIds'])
+        && get(/databases/$(database)/documents/classes/$(classId)).data.studentIds.hasAny([studentId, studentFirestoreId]);
+    }
+
+    match /attendance/{id} {
+      // Admin monitors attendance; Faculty records attendance only for their
+      // assigned class/students; Students can view their own records.
+      allow read: if isAdmin()
+        || (isFaculty() && resource.data.teacherId == facultyTeacherId())
+        || (isStudent() && resource.data.studentId == studentIdForUser());
+
+      allow create: if isFaculty()
+        && request.resource.data.teacherId == facultyTeacherId()
+        && facultyAttendanceClassAccess(request.resource.data.classId, request.resource.data.studentId, request.resource.data.studentFirestoreId);
+
+      allow update: if isFaculty()
+        && resource.data.teacherId == facultyTeacherId()
+        && request.resource.data.teacherId == facultyTeacherId()
+        && request.resource.data.studentId == resource.data.studentId
+        && request.resource.data.classId == resource.data.classId
+        && facultyAttendanceClassAccess(request.resource.data.classId, request.resource.data.studentId, request.resource.data.studentFirestoreId);
+
+      allow delete: if isAdmin();
+    }
+
+    match /payments/{id} {
+      allow read: if isAdmin() || (isStudent() && resource.data.studentId == studentIdForUser());
+      allow write: if isAdmin();
+    }
+
+    match /enlistments/{id} {
+      allow read: if isAdmin() || (isStudent() && resource.data.studentId == studentIdForUser());
+      allow create: if isAdmin() || (isStudent() && request.resource.data.studentId == studentIdForUser());
+      allow update: if isAdmin() || (isStudent() && resource.data.studentId == studentIdForUser() && request.resource.data.studentId == resource.data.studentId);
+      allow delete: if isAdmin() || (isStudent() && resource.data.studentId == studentIdForUser());
+    }
+
+    match /announcements/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /excuseRequests/{id} {
+      // Students can read and create their own excuse requests.
+      // Faculty can read requests for their assigned classes and approve/reject them.
+      // Admin has full access.
+      allow read: if isAdmin()
+        || (isStudent() && resource.data.studentId == studentIdForUser())
+        || (isFaculty() && (
+            // Faculty can read if the request belongs to a class they teach
+            exists(/databases/$(database)/documents/classes/$(resource.data.classId))
+            && (get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.teacherAuthUid == request.auth.uid
+                || get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.teacherId == facultyTeacherId())
+        ));
+
+      allow create: if isStudent()
+        && request.resource.data.studentId == studentIdForUser()
+        && request.resource.data.keys().hasAll(['studentId','date','classId','reason','status','createdAt'])
+        && request.resource.data.status == 'Pending';
+
+      allow update: if isAdmin()
+        || (isFaculty() && (
+            exists(/databases/$(database)/documents/classes/$(resource.data.classId))
+            && (get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.teacherAuthUid == request.auth.uid
+                || get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.teacherId == facultyTeacherId())
+        ));
+
+      allow delete: if isAdmin();
+    }
+
+    function facultyOwnsClass(classId) {
+      return isFaculty()
+        && classId != null
+        && exists(/databases/$(database)/documents/classes/$(classId))
+        && (get(/databases/$(database)/documents/classes/$(classId)).data.teacherAuthUid == request.auth.uid
+            || get(/databases/$(database)/documents/classes/$(classId)).data.teacherId == facultyTeacherId());
+    }
+
+    function studentAssignedToClass(classId) {
+      return isStudent()
+        && classId != null
+        && exists(/databases/$(database)/documents/classes/$(classId))
+        && get(/databases/$(database)/documents/classes/$(classId)).data.keys().hasAny(['studentIds'])
+        && get(/databases/$(database)/documents/classes/$(classId)).data.studentIds.hasAny([studentIdForUser()]);
+    }
+
+    match /materials/{id} {
+      allow read: if isAdmin()
+        || (isFaculty() && resource.data.teacherId == facultyTeacherId())
+        || studentAssignedToClass(resource.data.classId);
+
+      allow create: if isAdmin()
+        || (facultyOwnsClass(request.resource.data.classId)
+            && request.resource.data.teacherId == facultyTeacherId()
+            && request.resource.data.keys().hasAny(['subjectCode'])
+            && ((get(/databases/$(database)/documents/classes/$(request.resource.data.classId)).data.keys().hasAny(['subjectCode'])
+                 && get(/databases/$(database)/documents/classes/$(request.resource.data.classId)).data.subjectCode == request.resource.data.subjectCode)
+                || (!get(/databases/$(database)/documents/classes/$(request.resource.data.classId)).data.keys().hasAny(['subjectCode'])
+                    && get(/databases/$(database)/documents/classes/$(request.resource.data.classId)).data.keys().hasAny(['code'])
+                    && get(/databases/$(database)/documents/classes/$(request.resource.data.classId)).data.code == request.resource.data.subjectCode)));
+
+      allow update: if isAdmin()
+        || (resource.data.teacherId == facultyTeacherId()
+            && facultyOwnsClass(resource.data.classId)
+            && request.resource.data.teacherId == resource.data.teacherId
+            && request.resource.data.classId == resource.data.classId);
+
+      allow delete: if isAdmin()
+        || (resource.data.teacherId == facultyTeacherId() && facultyOwnsClass(resource.data.classId));
+    }
+
+    match /events/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /adminNotifications/{id} {
+      allow read, write: if isAdmin();
+    }
+
+    match /settings/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid || isAdmin();
+    }
+
+    match /adminSettings/{uid} {
+      allow read, write: if isAdmin() && request.auth.uid == uid;
+    }
+    // Immutable security audit trail. Only administrators can read logs; any
+    // signed-in role may create a log only for its own authenticated identity.
+    match /auditLogs/{id} {
+      allow read: if isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.actorUid == request.auth.uid
+        && request.resource.data.actorEmail == request.auth.token.email
+        && (
+          (request.resource.data.actorRole == 'admin' && isAdmin())
+          || (request.resource.data.actorRole == 'faculty' && isFaculty())
+          || (request.resource.data.actorRole == 'student' && isStudent())
+        )
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+
+  }
+}

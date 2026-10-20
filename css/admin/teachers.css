@@ -1,0 +1,8 @@
+/* Admin teachers page-specific styles */
+.admin-teachers-page .content-panel { transition: box-shadow .2s ease; }
+
+
+/* Spark-free real faculty account setup */
+.teacher-login-box{border-left:4px solid #2563eb;padding:14px 16px;margin-top:8px;background:rgba(37,99,235,.06)}
+.teacher-login-box b{display:block;margin-bottom:6px}
+.teacher-login-box .form-help{display:block;margin-top:8px;opacity:.78}

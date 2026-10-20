@@ -1,0 +1,2 @@
+/* Student calendar page-specific styles */
+.calendar-page .event-card { transition: transform .2s ease; }

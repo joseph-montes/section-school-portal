@@ -1,0 +1,50 @@
+/* Student profile page-specific styles */
+.profile-page .profile-avatar-wrap { position: relative; }
+
+.profile-header {
+    margin-bottom: 25px;
+}
+
+.profile-header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.profile-header p {
+    margin: 0;
+    color: #777;
+}
+
+.profile-logout-section {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.profile-logout-section h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.profile-logout-section p {
+    margin: 0 0 20px;
+    color: #666;
+}
+
+.profile-logout-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 22px;
+    background: #d9534f;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.profile-logout-btn:hover {
+    background: #c9302c;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC Portal | Profile & Contact</title>
+
+    <link rel="stylesheet" href="../css/global/global.css">
+    <link rel="stylesheet" href="../css/student/profile.css">
+
+</head>
+<body class="student-profile-page">
+    <div id="toast" class="toast"></div>
+    <section id="dashboardPage" class="page dashboard-page">
+        <header class="dash-header">
+            <div class="brand">
+                <a href="student-dashboard.html" class="brand">
+                    <img src="../assets/cec-logo.png" alt="CEC Logo">
+                    <span>CEC <b>PORTAL</b></span>
+                </a>
+            </div>
+            <nav class="dash-nav">
+                <a href="student-dashboard.html" class="">HOME</a>
+                <a href="announcements.html" class="">ANNOUNCEMENTS</a>
+                <a href="calendar.html" class="">CALENDAR</a>
+            </nav>
+            <div class="header-actions">
+                <a href="ai-assistant.html" class="ai-nav-btn" title="CEC Academic Assistant" aria-label="Open CEC Academic Assistant"><span aria-hidden="true">✦</span></a>
+                
+                <button id="notificationBtn" class="icon-btn" title="Notifications">🔔<i id="notificationBadge"></i></button>
+                <button id="profileBtn" class="profile-circle">♙</button>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <aside class="sidebar">
+                <div class="sidebar-profile">
+                    <div id="sidebarAvatar" class="sidebar-avatar">♙</div>
+                    <div>
+                        <strong id="sidebarStudentName">Student</strong>
+                        <span id="sidebarStudentId">Student</span>
+                    </div>
+                </div>
+
+                <div class="side-tools">
+                    <a href="notifications.html"><span>🔔</span><small>Notifications</small></a>
+                    <a href="settings.html"><span>⚙</span><small>Settings</small></a>
+                </div>
+
+                <h4>ACADEMIC</h4>
+                <a class="side-link" href="student-dashboard.html" data-view="home"><span>▣</span><label>Class Schedule</label></a>
+                <a class="side-link" href="grades.html" data-view="grades"><span>▥</span><label>Grades & GPA</label></a>
+                <a class="side-link" href="attendance.html" data-view="attendance"><span>◉</span><label>Attendance Records</label></a>
+                <a class="side-link" href="subjects.html" data-view="subjects"><span>☑</span><label>Subject Enlistment</label></a>
+                <a class="side-link" href="materials.html" data-view="syllabi"><span>▤</span><label>Syllabi & Materials</label></a>
+                <a class="side-link" href="calendar.html" data-view="calendar"><span>◫</span><label>Calendar & Events</label></a>
+                <a class="side-link" href="announcements.html" data-view="announcements"><span>🔔</span><label>Announcements</label></a>
+
+                <h4>FINANCE &amp; PROFILE</h4>
+                <a class="side-link" href="tuition.html" data-view="tuition"><span>₱</span><label>Tuition & Payments</label></a>
+                <a class="side-link active" href="profile.html" data-view="profile"><span>♙</span><label>Profile & Contact</label></a>
+                <a class="side-link" href="settings.html" data-view="settings"><span>⚙</span><label>Settings</label></a>
+                <a class="logout-link" href="../html/index.html" id="logoutBtn">↪ <span>Logout</span></a>
+            </aside>
+
+            <main class="dashboard-main">
+
+                <div id="dashboardHome" class="dashboard-view">
+
+                    <div class="profile-header">
+                        <h1>Profile & Contact</h1>
+                        <p>Manage your student profile and account.</p>
+                    </div>
+
+                    <div class="profile-logout-section">
+                        <h2>Account</h2>
+                        <p>When you are finished using the CEC Portal, you can safely log out of your account.</p>
+
+                        <button type="button" id="profileLogoutBtn" class="profile-logout-btn">
+                            ↪ Logout
+                        </button>
+                    </div>
+
+                </div>
+
+                <div id="contentView" class="dashboard-view hidden"></div>
+
+            </main>
+        </div>
+    </section>
+
+    <div id="modalRoot"></div>
+
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+<script src="../js/core/firebase-config.js"></script>
+<script src="../js/core/database.js"></script>
+<script src="../js/core/app-core.js"></script>
+<script src="../js/student/profile.js"></script>
+
+</body>
+</html>

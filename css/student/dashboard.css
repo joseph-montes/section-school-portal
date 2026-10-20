@@ -1,0 +1,397 @@
+/* Student dashboard page-specific styles */
+.student-dashboard-page .feature-card { cursor: pointer; }
+
+/* =========================================================
+   STUDENT TOP NAVIGATION SECTIONS
+========================================================= */
+
+.student-dashboard-page .dashboard-main {
+    scroll-behavior: smooth;
+}
+
+.student-dashboard-page .dashboard-top-section,
+.student-dashboard-page .dashboard-info-section {
+    scroll-margin-top: 94px;
+}
+
+.student-dashboard-page .dashboard-info-section {
+    margin-top: 28px;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #dfe8ed;
+    border-radius: 14px;
+}
+
+.student-dashboard-page .info-section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.student-dashboard-page .info-section-heading h2 {
+    margin: 4px 0 0;
+    color: #203e55;
+    font-size: 26px;
+}
+
+.student-dashboard-page .info-section-number {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1f4f8f;
+    background: #edf6f5;
+    border-radius: 20px;
+    padding: 8px 11px;
+}
+
+.student-dashboard-page .about-content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr .8fr;
+    gap: 18px;
+}
+
+.student-dashboard-page .about-main-card,
+.student-dashboard-page .about-facts-card {
+    border: 1px solid #e1e9ed;
+    border-radius: 12px;
+    background: #fbfdfe;
+}
+
+.student-dashboard-page .about-main-card {
+    padding: 24px;
+}
+
+.student-dashboard-page .about-main-card h3 {
+    margin: 0 0 12px;
+    color: #203e55;
+    font-size: 20px;
+}
+
+.student-dashboard-page .about-main-card p {
+    margin: 0 0 13px;
+    color: #667984;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.student-dashboard-page .about-main-card p:last-child {
+    margin-bottom: 0;
+}
+
+.student-dashboard-page .about-main-card a,
+.student-dashboard-page .contact-link {
+    color: #1f4f8f;
+    font-weight: 800;
+}
+
+.student-dashboard-page .about-facts-card {
+    padding: 7px 20px;
+}
+
+.student-dashboard-page .about-fact {
+    padding: 18px 0;
+    border-bottom: 1px solid #e6edef;
+}
+
+.student-dashboard-page .about-fact:last-child {
+    border-bottom: 0;
+}
+
+.student-dashboard-page .about-fact span,
+.student-dashboard-page .portal-contact-card > div > span {
+    display: block;
+    margin-bottom: 6px;
+    color: #8a9aa3;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.student-dashboard-page .about-fact strong,
+.student-dashboard-page .about-fact small {
+    display: block;
+}
+
+.student-dashboard-page .about-fact strong {
+    color: #203e55;
+    font-size: 12px;
+}
+
+.student-dashboard-page .about-fact small {
+    margin-top: 5px;
+    color: #7a8b94;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.student-dashboard-page .section-intro {
+    max-width: 850px;
+    margin: -5px 0 20px;
+    color: #6f818b;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   PROGRAM CARDS
+========================================================= */
+
+.student-dashboard-page .program-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.student-dashboard-page .portal-program-card {
+    position: relative;
+    min-height: 150px;
+    padding: 21px;
+    border: 1px solid #dfe8ed;
+    border-radius: 12px;
+    background: #fbfdfe;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.student-dashboard-page .portal-program-card:hover {
+    transform: translateY(-2px);
+    border-color: #c9dddd;
+    box-shadow: 0 10px 24px rgba(32, 62, 85, .08);
+}
+
+.student-dashboard-page .portal-program-card > span {
+    color: #1f4f8f;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.student-dashboard-page .portal-program-card h3 {
+    margin: 12px 0 7px;
+    color: #203e55;
+    font-size: 20px;
+}
+
+.student-dashboard-page .portal-program-card p {
+    margin: 0;
+    color: #70818b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   CONTACT CARDS
+========================================================= */
+
+.student-dashboard-page .contact-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.student-dashboard-page .portal-contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    min-height: 245px;
+    padding: 21px;
+    border: 1px solid #dfe8ed;
+    border-radius: 12px;
+    background: #fbfdfe;
+}
+
+.student-dashboard-page .contact-icon {
+    flex: 0 0 43px;
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf6f5;
+    color: #1f4f8f;
+    font-size: 10px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.student-dashboard-page .portal-contact-card h3 {
+    margin: 3px 0 8px;
+    color: #203e55;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.student-dashboard-page .portal-contact-card p {
+    margin: 0 0 12px;
+    color: #70818b;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.student-dashboard-page .contact-details {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 13px;
+}
+
+.student-dashboard-page .contact-details strong {
+    color: #536974;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.student-dashboard-page .contact-link {
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.student-dashboard-page .contact-link:hover {
+    text-decoration: underline;
+}
+
+.student-dashboard-page .contact-note {
+    margin-top: 15px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: #f5f8fa;
+    color: #6d7e87;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.student-dashboard-page .contact-note strong {
+    color: #203e55;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+========================================================= */
+
+@media (max-width: 1000px) {
+    .student-dashboard-page .about-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-dashboard-page .program-card-grid,
+    .student-dashboard-page .contact-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .student-dashboard-page .dashboard-info-section {
+        padding: 20px;
+    }
+
+    .student-dashboard-page .program-card-grid,
+    .student-dashboard-page .contact-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-dashboard-page .portal-contact-card {
+        min-height: auto;
+    }
+}
+
+/* ===== STUDENT DASHBOARD REDESIGN - KPI / WELCOME / QUICK ACTIONS ===== */
+.student-dashboard-page .stu-warn-banner {
+    display:flex; align-items:center; gap:8px;
+    background:#fef2f2; border:1px solid #fca5a5; border-radius:10px;
+    color:#b91c1c; font-size:.82rem; padding:10px 14px; margin-bottom:12px;
+}
+.student-dashboard-page .stu-welcome-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(135deg,#1e40af 0%,#2563eb 100%);
+    border-radius:12px; padding:14px 18px; color:#fff; margin-bottom:14px;
+}
+.student-dashboard-page .stu-welcome-left { display:flex; flex-direction:column; gap:3px; }
+.student-dashboard-page .stu-greeting { font-size:.93rem; font-weight:600; }
+.student-dashboard-page .stu-greeting strong { font-weight:800; }
+.student-dashboard-page .stu-sub { font-size:.73rem; opacity:.85; }
+.student-dashboard-page .stu-date { font-size:.72rem; opacity:.8; white-space:nowrap; }
+
+.student-dashboard-page .stu-kpi-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:12px;
+}
+.student-dashboard-page .stu-kpi-card {
+    display:flex; align-items:center; gap:10px;
+    background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:12px 14px;
+}
+.student-dashboard-page .stu-kpi-card b { display:block; font-size:1.2rem; color:#111827; line-height:1.1; }
+.student-dashboard-page .stu-kpi-card span { display:block; font-size:.68rem; color:#6b7280; margin-top:2px; }
+.student-dashboard-page .stu-kpi-icon {
+    width:34px; height:34px; border-radius:9px; font-size:1.1rem;
+    display:grid; place-items:center; flex-shrink:0;
+}
+.student-dashboard-page .stu-kpi-icon.kpi-green { background:#d1fae5; }
+.student-dashboard-page .stu-kpi-icon.kpi-blue  { background:#dbeafe; }
+.student-dashboard-page .stu-kpi-icon.kpi-purple{ background:#ede9fe; }
+.student-dashboard-page .stu-kpi-icon.kpi-orange{ background:#ffedd5; }
+
+.student-dashboard-page .stu-quick-actions {
+    display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;
+}
+.student-dashboard-page .stu-quick-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:9px 14px; border-radius:8px; font-size:.78rem; font-weight:700;
+    cursor:pointer; border:none; transition:opacity .15s;
+}
+.student-dashboard-page .stu-quick-btn:hover { opacity:.88; }
+.student-dashboard-page .stu-quick-btn span { font-size:1rem; }
+.student-dashboard-page .stu-quick-btn.sqb-blue   { background:#dbeafe; color:#1e40af; }
+.student-dashboard-page .stu-quick-btn.sqb-green  { background:#d1fae5; color:#065f46; }
+.student-dashboard-page .stu-quick-btn.sqb-purple { background:#ede9fe; color:#5b21b6; }
+.student-dashboard-page .stu-quick-btn.sqb-orange { background:#ffedd5; color:#9a3412; }
+
+.student-dashboard-page .stu-dash-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;
+}
+.student-dashboard-page .stu-dash-col {
+    background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px 16px;
+}
+.student-dashboard-page .stu-section-head {
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.student-dashboard-page .stu-section-head h4 {
+    margin:0; font-size:.85rem; color:#1e3a5f;
+}
+.student-dashboard-page .text-link {
+    font-size:.72rem; color:#2563eb; background:none; border:none;
+    cursor:pointer; padding:0; font-weight:600;
+}
+.student-dashboard-page .stu-classes-list { display:flex; flex-direction:column; gap:8px; }
+.student-dashboard-page .stu-class-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 10px; background:#f9fafb; border-radius:8px; gap:8px;
+}
+.student-dashboard-page .stu-class-info strong { display:block; font-size:.82rem; color:#111827; }
+.student-dashboard-page .stu-class-info span { font-size:.71rem; color:#6b7280; }
+.student-dashboard-page .stu-class-badge {
+    font-size:.68rem; padding:3px 8px; border-radius:20px;
+    background:#e0f2fe; color:#0369a1; font-weight:700; white-space:nowrap;
+}
+.student-dashboard-page .stu-ann-list { display:flex; flex-direction:column; gap:8px; }
+.student-dashboard-page .stu-ann-item {
+    padding:8px 10px; background:#f9fafb; border-radius:8px;
+}
+.student-dashboard-page .stu-ann-title { font-size:.82rem; font-weight:700; color:#111827; display:block; }
+.student-dashboard-page .stu-ann-meta { font-size:.7rem; color:#6b7280; }
+
+/* Typography fixes for student pages */
+.student-dashboard-page .panel-header h2 { font-size:1.15rem; font-weight:700; color:#1e3a5f; }
+.student-dashboard-page .panel-header .eyebrow { font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:#6b7280; }
+.student-dashboard-page .metric { padding:12px 14px; }
+.student-dashboard-page .metric b { font-size:1.3rem; }
+.student-dashboard-page .metric span { font-size:.68rem; margin-top:3px; }
+.student-dashboard-page .info-box { font-size:.82rem; padding:10px 13px; }
+.student-dashboard-page .data-table td { font-size:.82rem; padding:8px 10px; }
+.student-dashboard-page .data-table th { font-size:.72rem; padding:8px 10px; }
+
+@media(max-width:900px){
+    .student-dashboard-page .stu-kpi-grid { grid-template-columns:repeat(2,1fr); }
+    .student-dashboard-page .stu-dash-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px){
+    .student-dashboard-page .stu-kpi-grid { grid-template-columns:1fr 1fr; }
+    .student-dashboard-page .stu-quick-actions { flex-wrap:wrap; }
+    .student-dashboard-page .stu-welcome-bar { flex-direction:column; align-items:flex-start; gap:4px; }
+}
